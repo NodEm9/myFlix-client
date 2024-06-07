@@ -4,25 +4,47 @@ import { MovieView} from "../movie-view/movie-view";
 
 
 export const MainView = () => {
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      Title: "Jurassic Park",
-      ImageURL: "https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg"
-    },
-    {
-      id: 2,
-      Title: "The Shawshank Redemption",
-      ImageURL: "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg"
-    },
-    {
-      id: 3,
-      Title: "Matrix",
-      ImageURL: "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg"
-    }
-  
-  ]);
+  const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+
+  useEffect(() => {
+    fetch("https://movie-api-h54p.onrender.com/movies")
+      .then((response) => response.json())
+      .then((data) => {
+        const moviesFromAPI = data.map(movie => {
+          return {
+            _id: movie._id,
+            ImageUrl: movie.ImageUrl,
+            Title: movie.Title,
+            Description: movie.Description,
+            Genre:[ {
+              name: movie.Genre.name,
+              description: movie.Genre.description
+            }],
+            Director:[{
+              name: movie.Director.name,
+              bio: movie.Director.bio,
+              birthyear: movie.Director.birthyear,
+              deathyear: movie.Director.deathyear
+            }],
+            Actor: [{
+              name: movie.Actor.name,
+              bio: movie.Actor.bio
+            }],
+            ReleaseDate: movie.ReleaseDate,
+            Rating: movie.Rating,
+            Featured: movie.Featured
+          }
+        });
+        console.log(data);
+
+        if (moviesFromAPI.length === 0) {
+          return <div className="main-view">The list is empty!</div>;
+        }
+      
+        setMovies(moviesFromAPI);
+      });
+  }, []);
   
   if (selectedMovie) {
     return <MovieView
@@ -31,9 +53,7 @@ export const MainView = () => {
     />;
   };
 
-  if (movies.length === 0) {
-    return <div className="main-view">The list is empty!</div>;
-  }
+  
 
   return (
     <div className="main-view">
