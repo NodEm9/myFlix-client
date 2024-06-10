@@ -66,9 +66,9 @@ export const MovieView = ({ movie, onBackClick }) => {
         </div>
         <div className="movie-view__featured">
           <h3>Featured: </h3>
-          <div className="movie-runtime" key={movie.Featured}>
-            {movie.Featured}
-          </div>
+          <span className="movie-runtime" key={movie.Featured}>
+            {movie.Featured ? `${movie.Featured}` : "No information available."}
+          </span>
         </div>
         <div className="button-wrapper">
           <button className="back-button" onClick={onBackClick}>
