@@ -70,7 +70,7 @@ export const MovieView = ({ movie, onBackClick }) => {
             {movie.Featured}
           </div>
         </div>
-        <div>
+        <div className="button-wrapper">
           <button className="back-button" onClick={onBackClick}>
             <FaArrowLeft />
             Back
