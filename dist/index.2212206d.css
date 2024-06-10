@@ -251,6 +251,12 @@ h3 {
   margin-right: 1rem;
 }
 
+.button-wrapper {
+  justify-content: flex-end;
+  gap: 1rem;
+  display: flex;
+}
+
 .back-button {
   color: #333;
   cursor: pointer;
