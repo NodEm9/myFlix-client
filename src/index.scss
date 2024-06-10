@@ -258,6 +258,12 @@ $nav-background: #f2f2f2;
   margin-right: 1rem;
 }
 
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
 .back-button {
   display: flex;
   width: 15%;
