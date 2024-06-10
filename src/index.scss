@@ -288,6 +288,16 @@ p {
   line-height: 1.5;
 }
 
+.movie-view__featured {
+  display: flex;
+  gap: 1rem;
+
+  span {
+    color: $primary-color;
+    font-weight: bold;
+  }
+}
+
 @media all and (max-width: 500px){
   .card-container {
     grid-template-columns:  repeat(2, minmax(100px, 22em));
@@ -315,4 +325,13 @@ p {
       max-width: 100%;
     }
   }
+
+  .button-wrapper {
+    justify-content: center;
+  }
+
+  .back-button {
+    width: 20%;
+  }
+ 
 }

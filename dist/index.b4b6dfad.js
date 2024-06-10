@@ -27924,9 +27924,9 @@ const MovieView = ({ movie, onBackClick })=>{
                                 lineNumber: 68,
                                 columnNumber: 11
                             }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                 className: "movie-runtime",
-                                children: movie.Featured
+                                children: movie.Featured ? `${movie.Featured}` : "No information available."
                             }, movie.Featured, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
                                 lineNumber: 69,

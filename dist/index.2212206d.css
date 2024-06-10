@@ -281,6 +281,16 @@ p {
   line-height: 1.5;
 }
 
+.movie-view__featured {
+  gap: 1rem;
+  display: flex;
+}
+
+.movie-view__featured span {
+  color: #4682b4;
+  font-weight: bold;
+}
+
 @media (width <= 500px) {
   .card-container {
     grid-template-columns: repeat(2, minmax(100px, 22em));
@@ -306,6 +316,14 @@ p {
 
   .movie-view__img .img-wiew {
     max-width: 100%;
+  }
+
+  .button-wrapper {
+    justify-content: center;
+  }
+
+  .back-button {
+    width: 20%;
   }
 }
 /*# sourceMappingURL=index.2212206d.css.map */
