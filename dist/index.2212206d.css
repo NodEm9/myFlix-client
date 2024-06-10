@@ -89,8 +89,8 @@
 .search-container input {
   border: 1px solid #333;
   border-radius: 5px;
-  width: 300px;
-  padding: .5rem;
+  width: 350px;
+  padding: 1rem;
 }
 
 .main-view {
