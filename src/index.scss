@@ -1,10 +1,11 @@
-$primary-color: #4682b4;
+$primary-color: #2284d5;
 $secondary-color: #ffff;
 $tertiary-color: #333333;
 $loading-color: #f5f5f5;
-$font-family: 'Roboto', sans-serif;
+$font-family: 'Lato', sans-serif;
 $active-color: #1efe00;
 $nav-background: #f2f2f2;
+$brand-color: #1c960c;
 
 * {
   margin: 0;
@@ -31,26 +32,14 @@ $nav-background: #f2f2f2;
   .nav-items {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;;
     color: $secondary-color;
+    font-size: 16px;
   
     .nav-item {
       font-size: 1.2rem;
       font-weight: bold;
-      border-radius: 5px;
       cursor: pointer;
-  
-      &__links{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 3rem;
-      }
-  
-      &__link-one a {
-        font-size: calc(17px + 1vmin);
-        margin-top: -18px;
-      }
+      padding: 0 1rem;
   
       a {
         text-decoration: none;
@@ -64,20 +53,59 @@ $nav-background: #f2f2f2;
           color: $active-color;
       }
     }
-    
-    .login {
-      color: $primary-color;
-      text-decoration: none;
-    }
   }
   }
 
-.nav-item__links-two {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-}
+  .nav-item__links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+
+    h1 {
+      font-size: 1.5rem;
+      color: $brand-color;
+    }
+
+    .nav-link {
+      margin: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: $tertiary-color;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover, &:focus {
+        color: $primary-color;
+      }
+    }
+
+  }
+
+  .nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+
+    .login {
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 0.4rem 2rem;
+      border: 1px solid $tertiary-color;
+      border-radius: 25px;
+      background-color: $active-color;
+      color: $tertiary-color;
+      cursor: pointer;
+
+      &:hover, &:focus {
+        color: $primary-color;
+      }
+    }
+  }
+
 
 .card-container {
   display: grid;
@@ -278,7 +306,106 @@ $nav-background: #f2f2f2;
   }
 }
 
+.forms-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forms-view p {
+  font-size: 1rem;
+  color: $tertiary-color;
+  margin: 0 10px 0 10px;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 0;
+  padding: 1.5rem 0;
+  color: $tertiary-color;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    text-align: center;
+    margin-left: 3.9rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+  input {
+      width: 250px;
+      padding: 0.5rem;
+      border: 1px solid $tertiary-color;
+      border-radius: 5px;
+      margin-left: 5px;
+      visibility: visible;
+    }
+
+    label {
+      visibility: hidden;
+    }
+
+  button {
+      display: block;
+      width: 100px;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      background-color: $active-color;
+      color: $tertiary-color;
+      font-weight: 700;
+      left: 0;
+      margin-left: -3.5rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover, &:focus {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+#email {
+  margin-left: 2.3rem;
+}
+
+#birthday {
+  margin-left: 1.2rem;
+}
+
+
 @media all and (max-width: 500px){
+  .nav-items {
+   .nav-item {
+    padding: 0.5rem 1rem;
+   }
+  }
+
+  .nav-item__links {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+    }
+  }
+
   .card-container {
     grid-template-columns:  repeat(2, minmax(100px, 22em));
   }
@@ -289,5 +416,28 @@ $nav-background: #f2f2f2;
   }
   .movie-card {
     width: 100%;
+  }
+
+  .forms-view {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items:flex-start
+  }
+
+  .forms-view p {
+    margin: 0 0 0 200px;
+    font-size: 1.5rem;
+  }
+
+  forms {
+    h1 {
+      margin-left: 0;
+    }
+
+    form {
+      input {
+        width: 200px;
+      }
+    }
   }
 }
