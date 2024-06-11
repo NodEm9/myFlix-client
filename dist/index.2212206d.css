@@ -305,99 +305,18 @@ h3 {
   font: 600;
 }
 
-<<<<<<< HEAD
-.forms-view {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.forms-view p {
-  color: #333;
-  margin: 0 10px;
-  font-size: 1rem;
-}
-
-.forms {
-  color: #333;
-  cursor: pointer;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5rem 0;
-  font-size: 16px;
-  font-weight: bold;
-  display: flex;
-  position: relative;
-  top: 0;
-}
-
-.forms h1 {
-  text-align: center;
-  margin: 1rem 0 1rem 3.9rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.forms form {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-=======
 p {
   line-height: 1.5;
 }
 
 .movie-view__featured {
->>>>>>> d5c88363272e29c2578ed2c6a96d78226ddc2e32
   gap: 1rem;
   display: flex;
 }
 
-<<<<<<< HEAD
-.forms form input {
-  visibility: visible;
-  border: 1px solid #333;
-  border-radius: 5px;
-  width: 250px;
-  margin-left: 5px;
-  padding: .5rem;
-}
-
-.forms form label {
-  visibility: hidden;
-}
-
-.forms form button {
-  color: #333;
-  cursor: pointer;
-  background-color: #1efe00;
-  border: none;
-  border-radius: 5px;
-  width: 100px;
-  margin-left: -3.5rem;
-  padding: .5rem;
-  font-weight: 700;
-  transition: opacity .2s;
-  display: block;
-  left: 0;
-}
-
-.forms form button:hover, .forms form button:focus {
-  opacity: .8;
-}
-
-#email {
-  margin-left: 2.3rem;
-}
-
-#birthday {
-  margin-left: 1.2rem;
-=======
 .movie-view__featured span {
-  color: #4682b4;
+  color: #2284d5;
   font-weight: bold;
->>>>>>> d5c88363272e29c2578ed2c6a96d78226ddc2e32
 }
 
 @media (width <= 500px) {
@@ -413,19 +332,6 @@ p {
     font-size: 1rem;
   }
 
-  .movie-view {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
-  }
-
-  .movie-view__content {
-    margin-left: 0;
-  }
-
-  .movie-view__img .img-wiew {
-    max-width: 100%;
-  }
-
   .card-container {
     grid-template-columns: repeat(2, minmax(100px, 22em));
   }
@@ -439,25 +345,6 @@ p {
     width: 100%;
   }
 
-<<<<<<< HEAD
-  .forms-view {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-
-  .forms-view p {
-    margin: 0 0 0 200px;
-    font-size: 1.5rem;
-  }
-
-  forms h1 {
-    margin-left: 0;
-  }
-
-  forms form input {
-    width: 200px;
-=======
   .movie-view {
     grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
@@ -477,7 +364,6 @@ p {
 
   .back-button {
     width: 20%;
->>>>>>> d5c88363272e29c2578ed2c6a96d78226ddc2e32
   }
 }
 /*# sourceMappingURL=index.2212206d.css.map */
