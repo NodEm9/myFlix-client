@@ -41,7 +41,7 @@ export const MovieView = ({ movie, onBackClick }) => {
             </div>
 
           ))}
-        </div>
+        </div> 
         <div className="movie-view__actor">
           <h3>Actors: </h3>
           <div className="movie-actors">
