@@ -65,7 +65,7 @@ export const MainView = () => {
           setUser(user);
           setToken(token);
           }} />
-       <p> or</p>
+       <p>or</p>
         <SignupView />
       </div>
     
