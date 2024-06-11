@@ -46,7 +46,7 @@ export const MovieView = ({ movie, onBackClick }) => {
           <h3>Actors: </h3>
           <div className="movie-actors">
             {movie.Actor.map(actor => (
-              <div key={actor.name} className="actor">
+              <div key={actor._id} className="actor">
                 <p>{actor}</p>
               </div>
 
