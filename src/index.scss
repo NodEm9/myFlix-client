@@ -122,8 +122,8 @@ $brand-color: #1c960c;
   padding: 1rem;
 
   input {
-    width: 300px;
-    padding: 0.5rem;
+    width: 350px;
+    padding: 1rem;
     border: 1px solid $tertiary-color;
     border-radius: 5px;
   }
@@ -246,7 +246,7 @@ $brand-color: #1c960c;
   text-align: left;
   margin-left: -15%;
   top: 0;
-  gap: 1rem;
+  gap: 1rem; 
 }
 
 .movie-view__title {
@@ -289,6 +289,12 @@ $brand-color: #1c960c;
   margin-right: 1rem;
 }
 
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
 .back-button {
   display: flex;
   width: 15%;
@@ -309,88 +315,19 @@ $brand-color: #1c960c;
   }
 }
 
-.forms-view {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+p {
+  line-height: 1.5;
 }
 
-.forms-view p {
-  font-size: 1rem;
-  color: $tertiary-color;
-  margin: 0 10px 0 10px;
-}
-
-.forms {
+.movie-view__featured {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  top: 0;
-  padding: 1.5rem 0;
-  color: $tertiary-color;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+  gap: 1rem;
 
-  h1 {
-    font-size: 1.5rem;
+  span {
+    color: $primary-color;
     font-weight: bold;
-    margin: 1rem 0;
-    text-align: center;
-    margin-left: 3.9rem;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-  input {
-      width: 250px;
-      padding: 0.5rem;
-      border: 1px solid $tertiary-color;
-      border-radius: 5px;
-      margin-left: 5px;
-      visibility: visible;
-    }
-
-    label {
-      visibility: hidden;
-    }
-
-  button {
-      display: block;
-      width: 100px;
-      padding: 0.5rem;
-      border: none;
-      border-radius: 5px;
-      background-color: $active-color;
-      color: $tertiary-color;
-      font-weight: 700;
-      left: 0;
-      margin-left: -3.5rem;
-      cursor: pointer;
-      transition: opacity 0.2s;
-
-      &:hover, &:focus {
-        opacity: 0.8;
-      }
-    }
   }
 }
-
-#email {
-  margin-left: 2.3rem;
-}
-
-#birthday {
-  margin-left: 1.2rem;
-}
-
 
 @media all and (max-width: 500px){
   .nav-items {
@@ -436,26 +373,27 @@ $brand-color: #1c960c;
     width: 100%;
   }
 
-  .forms-view {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items:flex-start
+  .movie-view {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
   }
 
-  .forms-view p {
-    margin: 0 0 0 200px;
-    font-size: 1.5rem;
+  .movie-view__content {
+    margin-left: 0;
   }
 
-  forms {
-    h1 {
-      margin-left: 0;
-    }
-
-    form {
-      input {
-        width: 200px;
-      }
+  .movie-view__img {
+    .img-wiew {
+      max-width: 100%;
     }
   }
+
+  .button-wrapper {
+    justify-content: center;
+  }
+
+  .back-button {
+    width: 20%;
+  }
+ 
 }
