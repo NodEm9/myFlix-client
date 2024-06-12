@@ -56,19 +56,19 @@ export const MainView = () => {
       });
   }, [token]);
 
- 
+
   if (!user) {
     return (
       <div className="forms-view">
-         <LoginView
-        onLoggedIn={(user, token) => {
-          setUser(user);
-          setToken(token);
+        <LoginView
+          onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
           }} />
-       <p>or</p>
+        <p>or</p>
         <SignupView />
       </div>
-    
+
     )
   }
 
@@ -100,7 +100,6 @@ export const MainView = () => {
     )
   };
 
-  if (movies.length === 0) return <div className="main-view">The list is empty!</div>; // If there are no movies, display a message
 
   return (
     <div className="main-view">
@@ -114,10 +113,16 @@ export const MainView = () => {
         <input type="text" placeholder="Search" className="search" /> {/*Add a temporal search bar **/}
       </div>
       {movies.length === 0 ? (
-        <div className="card-container" >
-          {Array(12).fill(0).map((n) => (
-            <Skeleton key={n} />
-          ))}
+        <div>
+          <div>
+            The movie list it empty!,
+            <p>Please, be patient the movies are propably loading...</p>
+          </div>
+          <div className="card-container" >
+            {Array(12).fill(0).map((n) => (
+              <Skeleton key={n} />
+            ))}
+          </div>
         </div>
       ) : (
         <div className="card-container">
