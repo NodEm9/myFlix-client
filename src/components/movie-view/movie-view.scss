@@ -1,0 +1,19 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+
+.title {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.movie-actor {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.actor {
+  display: inline;
+  gap: 14px;
+}
