@@ -1,11 +1,23 @@
 import { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import  Col  from "react-bootstrap/Col";
+import "./login-view.scss"; 
 
-export const LoginView = ({ onLoggedIn }) => {
+
+const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Form validation
+    const Form = e.currentTarget;
+    if (Form.checkValidity() === false) {
+      e.stopPropagation();
+    }
+
     console.log(username, password);
     const data = {
       Username: username,
@@ -24,41 +36,44 @@ export const LoginView = ({ onLoggedIn }) => {
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
-        }else{
+          window.location.reload();
+        } else {
           alert("No such user found. Please try again.");
         }
       }).catch((e) => {
-        alert("Something went wrong"); 
+        alert("Something went wrong");
+        throw new Error(e);
       });
+    
+      setValidated(true);
   };
 
   return (
-    <div className="forms">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="Username">
-          Username:
-          <input
-            type="text"
-            value={username}
-            required
-            minLength={5}
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label htmlFor="Password">
-          Password:
-          <input
-            type="password"
-            value={password}
-            required
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type="submit" className="submitBtn">Submit</button>
-      </form>
-    </div>
+    <Form noValidate validated={validated} onSubmit={handleSubmit} className="form mt-5">
+      <Form.Group as={Col} controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
+          type="text"
+          value={username}
+          required
+          minLength={5}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
+          type="password"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit" className="mb-2 mt-2 float-end" >
+        Submit
+      </Button>
+    </Form>
   );
 };
+
+export default LoginView;
