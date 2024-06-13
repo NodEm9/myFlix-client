@@ -1,21 +1,23 @@
 import PropTypes from 'prop-types';
-import { CustomImage } from '../custom-image/custom-image';
+import { Card, Button } from 'react-bootstrap';
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (  
-    <div
-      className="movie-card" 
-      onClick={() => {
-        onMovieClick(movie);
-      }}
-    >
-      <div className='movie-card__header'>
-        <CustomImage src={movie.ImageUrl} alt={"Movie Poster"} />
-      </div>
-      <h3 className='movie-card__title'>{movie.Title}</h3>
-      <p className='movie-card__description'>{movie.Description}</p>
-      <p className='movie-card__genre'>Genre</p>
-    </div>   
+    <Card
+      onClick={() => onMovieClick(movie)}
+      className='h-100'
+    > 
+      <Card.Img variant="top" src={movie.ImageUrl} />
+      <Card.Body>
+        <Card.Title>{movie.Title}</Card.Title>
+        <Card.Text>{movie.Description}</Card.Text>
+        <Button onClick={() =>
+          onMovieClick(movie)} variant="link"
+        >
+          Open
+        </Button>
+      </Card.Body> 
+    </Card>   
   );  
 }; 
 
