@@ -1,23 +1,23 @@
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import { useState } from 'react';
+
 export const Navbar = () => {
+ let user = JSON.parse(localStorage.getItem("user"));
+  const [loggedInUser, setLoggedInUser] = useState(user ? user.Username : "Guest");
+ 
   return (
-    <div className="navbar">
-      <div className="nav-items">
-
-        <div className="nav-item">
-          <div className="nav-item__links">
-            <h1 className="nav-item__links-one">myFlix</h1>
-            <div className="nav-item__links-two">
-              <a href="/" className="nav-link">Home</a>
-              <a href="/profile" className="nav-link">Profile</a>
-            </div>
-          </div>
-        </div>
-
-        <div className="nav-item">
-          <a href="/login" className="nav-link login">Login</a>
-        </div>
-
-      </div>
-    </div>
+    <Navbar className="bg-body p-0">
+      <Container className='bg-body p-4'>
+        <Navbar.Brand href="#home" className="fw-bold fs-2">myFlix</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text>
+            Signed in as: <a href="#login">{loggedInUser}</a>
+          </Navbar.Text>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
-};
+}
+
