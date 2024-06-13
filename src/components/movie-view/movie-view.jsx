@@ -1,23 +1,25 @@
+import "./movie-view.scss";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import { FaArrowLeft } from "react-icons/fa6";
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
-    <div className="movie-view">
-      <div className="movie-view__img">
-        <img src={movie.ImageUrl} key={movie.ImageUrl} className="img-wiew" />
-      </div>
-      <div className="movie-view__content">
-        <div className="movie-view__title">
-          <span>Title:</span>
-          <p className="movie-title" key={movie.Title}>{movie.Title}</p>
-        </div>
-        <div className="movie-view__description">
+    <Row md={2} className="pt-5">
+      <Col md={8}>
+          <Col className="title">
+            <h3 className="text-md-lg">Title:</h3>
+            <span className="fw-bolder fs-3" key={movie.Title}>{movie.Title}</span>
+          </Col>
+        <Col className="">
           <h3>Description: </h3>
-          <p className="movie-description" key={movie.Description}>
+          <p className="" key={movie.Description}>
             {movie.Description}
           </p>
-        </div>
-        <div className="movie-view__genre">
+        </Col>
+        <Col className="">
           <h3>Genre: </h3>
           <span className="movie-genre">
             {movie.Genre.map(genre => (
@@ -26,57 +28,65 @@ export const MovieView = ({ movie, onBackClick }) => {
                 <p>{genre.description}</p>
               </div>
             ))}</span>
-        </div>
-        <div className="movie-view__director">
+        </Col>
+        <Col className="">
           <h3>Director: </h3>
           {movie.Director.map(director => (
             <div key={director.name} className="movie-director">
-              <p><span>Name:</span> {director.name}</p>
+              <p><span className="fw-bold">Name: </span> {director.name}</p>
               <p className="director-bio">
-                <span>Biblograph:</span>
+                <span className="fw-bold">Biblograph: </span>
                 <em className="bio">{director.bio}</em>
               </p>
-              <p><span>Birthdate:</span> {director.birthyear}</p>
-              <p><span>Deathyear:</span> {director.deathyear}</p>
+              <p><span className="fw-bold">Birthdate:</span> {director.birthyear}</p>
+              <p><span className="fw-bold">Deathyear:</span> {director.deathyear}</p>
             </div>
 
           ))}
-        </div> 
-        <div className="movie-view__actor">
-          <h3>Actors: </h3>
-          <div className="movie-actors">
+        </Col> 
+        <Col className="movie-actors">
+          <h3>Actors: </h3> 
             {movie.Actor.map(actor => (
-              <div key={actor._id} className="actor">
-                <p>{actor}</p>
-              </div>
-
-            ))}</div>
-        </div>
-        <div className="movie-view__release-date">
+              <span key={actor._id} className="actor">
+                {actor}
+              </span>
+            ))}
+        </Col>
+        <Col className="">
           <h3>ReleaseDate: </h3>
-          <div className="movie-runtime" key={movie.ReleaseDate}>
+          <div className="" key={movie.ReleaseDate}>
             {movie.ReleaseDate}
           </div>
-        </div>
-        <div className="movie-view__rating">
+        </Col>
+        <Col className="">
           <h3>Rating: </h3>
           <div className="movie-rating" key={movie.Rating}>
             {movie.Rating}
           </div>
-        </div>
-        <div className="movie-view__featured">
+        </Col>
+        <Col className="">
           <h3>Featured: </h3>
           <span className="movie-runtime" key={movie.Featured}>
             {movie.Featured ? `${movie.Featured}` : "No information available."}
           </span>
-        </div>
-        <div className="button-wrapper">
-          <button className="back-button" onClick={onBackClick}>
+        </Col>
+        <Col className="button-wrapper">
+          <Button
+            variant="secondary-danger"
+            className="float-end fw-bold" onClick={onBackClick}>
             <FaArrowLeft />
             Back
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button> 
+        </Col>
+      </Col>
+      <Col md={4}>
+        <Card.Img
+          src={movie.ImageUrl}
+          key={movie.ImageUrl}
+          alt="movie-poster"
+          className="w-100 h-80"
+        />
+      </Col>
+    </Row>
   );
 };
