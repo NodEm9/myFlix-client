@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
-import Skeleton from "../loading/skeleton";
-import { LoginView } from "../login-view/login-view";
+import LoginView from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-
+import Skeleton from "../loading/skeleton";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 export const MainView = () => {
   const storedUser = localStorage.getItem("user");
@@ -14,6 +17,7 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [displaySimilarMovies, setDisplaySimilarMovies] = useState([]);
+  const [showSignup, setShowSignup] = useState(false);
 
 
   useEffect(() => {
@@ -56,87 +60,104 @@ export const MainView = () => {
       });
   }, [token]);
 
-
-  if (!user) {
-    return (
-      <div className="forms-view">
-        <LoginView
-          onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }} />
-        <p>or</p>
-        <SignupView />
-      </div>
-
-    )
-  }
-
   if (selectedMovie) {
     // Filter similar movies by genre to get a list of similar movies
     let similarMovies = movies.filter(movie => movie.Genre[0].name === selectedMovie.Genre[0].name && movie.Title !== selectedMovie.Title);
     return (
-      <>
+      <Row>
         <MovieView
           movie={selectedMovie}
           onBackClick={() => setSelectedMovie(null)}
         />
         <hr /> <br />
         <h2>Similar Movies</h2>
-        <div className="card-container">
+        <Row  className="">
           {displaySimilarMovies ?
             similarMovies.map(movie => (
-              <MovieCard
-                key={movie.Title}
-                movie={movie}
-                onMovieClick={(newSelectedMovie) => {
-                  setSelectedMovie(newSelectedMovie);
-                }}
-              />
+              <Col md={3} key={movie._id} className="pb-5 pt-4">
+                <MovieCard
+                  movie={movie}
+                  onMovieClick={(newSelectedMovie) => {
+                    setSelectedMovie(newSelectedMovie);
+                  }}
+                />
+              </Col>
             )) : setDisplaySimilarMovies([]) // If there are no similar movies, display an empty array
           }
-        </div>
-      </>
+        </Row>
+      </Row>
     )
   };
 
-
   return (
-    <div className="main-view">
-      <header>
-        <button
-          onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
-          logout
-        </button>
-      </header>
-      <div className="search-container">
-        <input type="text" placeholder="Search" className="search" /> {/*Add a temporal search bar **/}
-      </div>
-      {movies.length === 0 ? (
+    <Row className="justify-content-md-center">
+      {!user ? (
+        <Col md={5} >
+          <h1 className="text-center  mt-4 fs-1-sm text-wrap fs-3" >Welcome to myFlix</h1>
+          {showSignup ? <SignupView /> :
+            <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} />}
+          <button
+            onClick={() => setShowSignup(!showSignup)}
+            className="bg-light border-0 lead link-primary mt-md-5 mt-sm-2 mt-xm-1 float-end"
+          >
+            {showSignup ? "Already have an account? Login here." :
+              "Don't have account? Sign Up here."}
+          </button>
+        </Col>
+      ) : selectedMovie ? (
+        <Col md={8} >
+          <MovieView
+            movie={selectedMovie}
+            onBackClick={() => setSelectedMovie(null)}
+          />
+        </Col>
+      ) : movies.length === 0 ? (
         <div>
-          <div>
+          <Col md={12} className="text-md-center">
             The movie list it empty!,
             <p>Please, be patient the movies are propably loading...</p>
-          </div>
-          <div className="card-container" >
-            {Array(12).fill(0).map((n) => (
-              <Skeleton key={n} />
-            ))}
-          </div>
+          </Col>
+          <Row >
+            <Col md={8} className="pb-5 h-100 justify-content-md-center">
+              {Array(12).fill(0).map((n) => (
+                <Skeleton key={n} />
+              ))}
+            </Col>
+          </Row>
         </div>
       ) : (
-        <div className="card-container">
-          {movies.map(movie => (
-            <MovieCard
-              key={movie.Title}
-              movie={movie}
-              onMovieClick={(newSelectedMovie) => {
-                setSelectedMovie(newSelectedMovie);
-              }}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+        <>
+          <Row className="pb-2">
+            <Col>
+              <Button
+                variant="outline-primary"
+                className="float-end mb-1 mt-3 me-3"
+                onClick={() => { setUser(null); setToken(null); localStorage.clear(); }
+                }>
+                logout
+              </Button>
+                  </Col>
+                </Row>
+          <Row className="pb-5 justify-content-md-center">
+            <Col md={4}>
+              <Form><Form.Control type="text" placeholder="Search for a movie" /></Form>
+            </Col>
+          </Row>
+          <Row className="pb-5">
+            {movies.map(movie => (
+              <Col md={3} key={movie._id} className="pb-5">
+                <MovieCard
+                  movie={movie}
+                  onMovieClick={(newSelectedMovie) => {
+                    setSelectedMovie(newSelectedMovie);
+                  }}
+                />
+              </Col>
+            ))}
+          </Row>
+        </>
+      )
+      }
+    </Row>
   );
 };
