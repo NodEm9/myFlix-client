@@ -2962,18 +2962,18 @@ const App = ()=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbar.Navbar), {}, void 0, false, {
                 fileName: "src/index.jsx",
-                lineNumber: 10,
+                lineNumber: 13,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {}, void 0, false, {
                 fileName: "src/index.jsx",
-                lineNumber: 11,
+                lineNumber: 14,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/index.jsx",
-        lineNumber: 9,
+        lineNumber: 12,
         columnNumber: 5
     }, undefined);
 };
@@ -2982,7 +2982,7 @@ const container = document.getElementById("root");
 const root = (0, _client.createRoot)(container);
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
     fileName: "src/index.jsx",
-    lineNumber: 19,
+    lineNumber: 22,
     columnNumber: 13
 }, undefined));
 var _c;
