@@ -1,21 +1,29 @@
 import { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
-export const SignupView = () => { 
+export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
-  
+  const [validated, setValidated] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
+    // Form validation
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+    }
+    
     const data = {
       Username: username,
       Password: password,
       Email: email,
       Birthday: birthday
     };
-    
+
     await fetch("https://movie-api-h54p.onrender.com/users", {
       method: "POST",
       headers: {
@@ -28,60 +36,56 @@ export const SignupView = () => {
         window.location.reload();
       } else {
         alert("Something went wrong. Please try again.");
-      } 
+      }
     }).catch((e) => {
-        console.log(e);
-      });
+      console.log(e);
+    });
+
+    setValidated(true);
   };
-  
+
   return (
-    <div className="forms">
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="Username">
-          Username:
-          <input
-            type="text"
-            value={username}
-            required
-            minLength={4}
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label htmlFor="Password">
-          Password:
-          <input
-            type="password"
-            value={password}
-            required
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <label htmlFor="Email">
-          Email:
-          <input
-            type="email"
-            value={email}
-            required
-            placeholder="Email"
-            id="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label htmlFor="Birthday">
-          Birthday:
-          <input
-            type="date"
-            value={birthday}
-            required
-            id="birthday"
-            onChange={(e) => setBirthday(e.target.value)}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
+          type="text"
+          value={username}
+          required
+          minLength={5}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
+          type="password"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formEmail">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
+          type="email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formBirthday">
+        <Form.Label>Birthday:</Form.Label>
+        <Form.Control
+          type="date"
+          value={birthday}
+          required
+          onChange={(e) => setBirthday(e.target.value)}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit" className="float-end mt-2">
+        Submit
+      </Button>
+    </Form>
   );
 };
