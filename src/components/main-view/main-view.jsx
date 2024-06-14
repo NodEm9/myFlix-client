@@ -9,6 +9,8 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+
+
 export const MainView = () => {
   const storedUser = localStorage.getItem("user");
   const storedToken = localStorage.getItem("token");
@@ -18,7 +20,6 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [displaySimilarMovies, setDisplaySimilarMovies] = useState([]);
   const [showSignup, setShowSignup] = useState(false);
-
 
   useEffect(() => {
     if (!token) return;
@@ -60,6 +61,7 @@ export const MainView = () => {
       });
   }, [token]);
 
+
   if (selectedMovie) {
     // Filter similar movies by genre to get a list of similar movies
     let similarMovies = movies.filter(movie => movie.Genre[0].name === selectedMovie.Genre[0].name && movie.Title !== selectedMovie.Title);
@@ -70,8 +72,8 @@ export const MainView = () => {
           onBackClick={() => setSelectedMovie(null)}
         />
         <hr /> <br />
-        <h2>Similar Movies</h2>
-        <Row  className="">
+        <h2 className="text-center">Similar Movies</h2>
+        <Row className="pb-5">
           {displaySimilarMovies ?
             similarMovies.map(movie => (
               <Col md={3} key={movie._id} className="pb-5 pt-4">
@@ -89,20 +91,33 @@ export const MainView = () => {
     )
   };
 
+  const searchMovies = (e) => {
+    e.preventDefault();
+    const searchValue = e.target.value;
+    const filteredMovies = movies.filter((movie) => {
+      return movie.Title.toLowerCase().includes(searchValue.toLowerCase());
+    });
+    setMovies(filteredMovies);
+  };
+
   return (
-    <Row className="justify-content-md-center">
+    <Row className="h-100 justify-content-md-center mt-md-5 pt-md-5">
       {!user ? (
         <Col md={5} >
-          <h1 className="text-center  mt-4 fs-1-sm text-wrap fs-3" >Welcome to myFlix</h1>
+          <h1 className="text-center mt-5 pt-5 fs-1-sm text-wrap fs-3" >
+            Welcome to myFlix
+          </h1>
           {showSignup ? <SignupView /> :
             <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} />}
-          <button
+          <Button
             onClick={() => setShowSignup(!showSignup)}
-            className="bg-light border-0 lead link-primary mt-md-5 mt-sm-2 mt-xm-1 float-end"
+            aria-atomic="true"
+            role="button"
+            className="bg-transparent fs-5 border-0 lead link-primary mt-md-3 mt-sm-2 mt-xm-1"
           >
             {showSignup ? "Already have an account? Login here." :
               "Don't have account? Sign Up here."}
-          </button>
+          </Button>
         </Col>
       ) : selectedMovie ? (
         <Col md={8} >
@@ -112,35 +127,40 @@ export const MainView = () => {
           />
         </Col>
       ) : movies.length === 0 ? (
-        <div>
+        <Row>
           <Col md={12} className="text-md-center">
             The movie list it empty!,
             <p>Please, be patient the movies are propably loading...</p>
           </Col>
-          <Row >
-            <Col md={8} className="pb-5 h-100 justify-content-md-center">
-              {Array(12).fill(0).map((n) => (
-                <Skeleton key={n} />
-              ))}
-            </Col>
-          </Row>
-        </div>
+          <Col md={8} className="pb-5 h-100 justify-content-md-center">
+            {Array(12).fill(0).map((n) => (
+              <Skeleton key={n} />
+            ))}
+          </Col>
+        </Row>
       ) : (
         <>
-          <Row className="pb-2">
+          <Row className="pb-2  mt- h-50">
             <Col>
               <Button
                 variant="outline-primary"
-                className="float-end mb-1 mt-3 me-3"
+                className="float-end mb-1 mt-1 me-3"
                 onClick={() => { setUser(null); setToken(null); localStorage.clear(); }
                 }>
                 logout
               </Button>
-                  </Col>
-                </Row>
-          <Row className="pb-5 justify-content-md-center">
+            </Col>
+          </Row>
+          <Row className="pb-5 pt-0 justify-content-md-center">
             <Col md={4}>
-              <Form><Form.Control type="text" placeholder="Search for a movie" /></Form>
+              <Form>
+                <Form.Control
+                  type="text"
+                  placeholder="Search for a movie"
+                  onChange={searchMovies}
+                  className="p-3"
+                />              
+              </Form>
             </Col>
           </Row>
           <Row className="pb-5">
