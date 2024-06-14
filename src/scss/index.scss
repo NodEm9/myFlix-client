@@ -13,6 +13,21 @@ $active-color: #1efe00;
 $nav-background: #f2f2f2;
 $brand-color: #1c960c;
 
+
+body {
+  font-family: $font-family;
+  background-color: $body-bg;
+  color: $tertiary-color;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  height: 100vh;
+
+}
+
 .card-container .movie-card {
   max-width: 80%; 
   min-width: 10%;
@@ -23,7 +38,7 @@ $brand-color: #1c960c;
 
 .movie-card {  
   display: grid;
-  grid-template-rows: auto repeat(1, auto auto 1fr auto);
+  grid-template-rows:  repeat(1, auto auto 1fr auto);
   width: 100%;
   height: 100%; 
   background-color: $secondary-color;
