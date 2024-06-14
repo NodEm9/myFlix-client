@@ -1,14 +1,22 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import  Col  from "react-bootstrap/Col";
-import "./login-view.scss"; 
+import Col from "react-bootstrap/Col";
+import "./login-view.scss";
+import { ToastNotification } from "../toast/toast";
 
 
 const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
+  const toastMessage = {
+    nonExist: "No such user found",
+    credential: "Somthing went wrong"
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +26,6 @@ const LoginView = ({ onLoggedIn }) => {
       e.stopPropagation();
     }
 
-    console.log(username, password);
     const data = {
       Username: username,
       Password: password
@@ -38,41 +45,50 @@ const LoginView = ({ onLoggedIn }) => {
           onLoggedIn(data.user, data.token);
           window.location.reload();
         } else {
-          alert("No such user found. Please try again.");
+          setErrMsg(toastMessage.nonExist);
+          setShowToast(true);
         }
       }).catch((e) => {
-        alert("Something went wrong");
+        setErrMsg(toastMessage.credential);
         throw new Error(e);
       });
-    
-      setValidated(true);
+    setValidated(true);
   };
 
+
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit} className="form mt-5">
-      <Form.Group as={Col} controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          required
-          minLength={5}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit" className="mb-2 mt-2 float-end" >
-        Submit
-      </Button>
-    </Form>
+    <div>
+      <div>
+        {errMsg !== toastMessage.credential ?
+          showToast && <ToastNotification message={toastMessage.credential} />
+          : showToast && <ToastNotification message={toastMessage.nonExist} />
+        }
+      </div>
+      <Form noValidate validated={validated} onSubmit={handleSubmit} className=" mt-2">
+        <Form.Group as={Col} controlId="formUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            required
+            minLength={5}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={handleSubmit} className="mb-2 mt-2 float-end" >
+          Submit
+        </Button>
+      </Form>
+    </div>
   );
 };
 
