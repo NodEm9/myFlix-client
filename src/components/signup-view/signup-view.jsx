@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { ToastNotification } from "../toast/toast";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -8,6 +9,13 @@ export const SignupView = () => {
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
   const [validated, setValidated] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
+  const toastMessage = {
+    acctExist: "Account already exists",
+    credential: "Somthing went wrong"
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,16 +43,25 @@ export const SignupView = () => {
         alert("Signup successful!");
         window.location.reload();
       } else {
-        alert("Something went wrong. Please try again.");
+        setShowToast(true);
+        setErrMsg(toastMessage.acctExist);
       }
     }).catch((e) => {
-      console.log(e);
+      setShowToast(true);
+      setErrMsg(toastMessage.credential);
     });
 
     setValidated(true);
   };
 
   return (
+    <div>
+        <div>
+        {errMsg !== toastMessage.credential ?
+          showToast && <ToastNotification message={toastMessage.credential} />
+          : showToast && <ToastNotification message={toastMessage.acctExist} />
+        }
+      </div>
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
@@ -68,7 +85,7 @@ export const SignupView = () => {
       <Form.Group controlId="formEmail">
         <Form.Label>Email:</Form.Label>
         <Form.Control
-          type="email"
+          type="email" 
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
@@ -86,6 +103,7 @@ export const SignupView = () => {
       <Button variant="primary" type="submit" className="float-end mt-2">
         Submit
       </Button>
-    </Form>
+      </Form>
+    </div>
   );
 };
