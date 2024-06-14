@@ -7,12 +7,20 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
-    <Row md={2} className="pt-5">
-      <Col md={8}>
-          <Col className="title">
-            <h3 className="text-md-lg">Title:</h3>
-            <span className="fw-bolder fs-3" key={movie.Title}>{movie.Title}</span>
-          </Col>
+    <Row md={2} className="movie-view justify-content-center pt-3 mt-5">
+      <Col md={4} className="mt-2">
+        <Card.Img
+          src={movie.ImageUrl}
+          key={movie.ImageUrl}
+          alt="movie-poster"
+          className="w-100 h-80"
+        />
+      </Col>
+      <Col md={8} className="mt-2">
+        <Col className="title">
+          <h3 className="text-md-lg">Title:</h3>
+          <span className="fw-bolder fs-3" key={movie.Title}>{movie.Title}</span>
+        </Col>
         <Col className="">
           <h3>Description: </h3>
           <p className="" key={movie.Description}>
@@ -43,19 +51,19 @@ export const MovieView = ({ movie, onBackClick }) => {
             </div>
 
           ))}
-        </Col> 
+        </Col>
         <Col className="movie-actors">
-          <h3>Actors: </h3> 
-            {movie.Actor.map(actor => (
-              <span key={actor._id} className="actor">
-                {actor}
-              </span>
-            ))}
+          <h3>Actors: </h3>
+          {movie.Actor.map(actor => (
+            <span key={actor._id} className="actor">
+              {`${actor}, `}
+            </span>
+          ))}
         </Col>
         <Col className="">
           <h3>ReleaseDate: </h3>
           <div className="" key={movie.ReleaseDate}>
-            {movie.ReleaseDate}
+            {movie.ReleaseDate.slice(0, 10)}
           </div>
         </Col>
         <Col className="">
@@ -76,16 +84,8 @@ export const MovieView = ({ movie, onBackClick }) => {
             className="float-end fw-bold" onClick={onBackClick}>
             <FaArrowLeft />
             Back
-          </Button> 
+          </Button>
         </Col>
-      </Col>
-      <Col md={4}>
-        <Card.Img
-          src={movie.ImageUrl}
-          key={movie.ImageUrl}
-          alt="movie-poster"
-          className="w-100 h-80"
-        />
       </Col>
     </Row>
   );
