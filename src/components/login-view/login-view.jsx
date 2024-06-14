@@ -50,6 +50,7 @@ const LoginView = ({ onLoggedIn }) => {
         }
       }).catch((e) => {
         setErrMsg(toastMessage.credential);
+        setShowToast(true);
         throw new Error(e);
       });
     setValidated(true);
