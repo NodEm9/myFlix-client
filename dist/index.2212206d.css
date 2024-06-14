@@ -6253,7 +6253,19 @@
   }
 }
 
-.title, .movie-actor {
+.movie-view {
+  flex-direction: row-reverse;
+  display: flex;
+}
+
+.title {
+  align-items: center;
+  gap: 24px;
+  padding-top: 6px;
+  display: flex;
+}
+
+.movie-actor {
   align-items: center;
   gap: 24px;
   display: flex;
@@ -19419,6 +19431,19 @@ textarea.form-control-lg {
   }
 }
 
+body {
+  color: #333;
+  box-sizing: border-box;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  font-family: Lato, sans-serif;
+}
+
+.App {
+  height: 100vh;
+}
+
 .card-container .movie-card {
   grid-row: span 4;
   grid-template-rows: subgrid;
@@ -19433,7 +19458,7 @@ textarea.form-control-lg {
   shape-margin: 20%;
   background-color: #fff;
   border-radius: 6px;
-  grid-template-rows: auto repeat(1, auto auto 1fr auto);
+  grid-template-rows: repeat(1, auto auto 1fr auto);
   width: 100%;
   height: 100%;
   font-size: calc(7px + 1vmin);
