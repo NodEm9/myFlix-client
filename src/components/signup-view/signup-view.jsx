@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { ToastNotification } from "../toast/toast";
+import { SuccessToast, ToastNotification } from "../toast/toast";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ export const SignupView = () => {
   const [showToast, setShowToast] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-  
+
   const defaultErrorMessage =  "Somthing went wrong"
   
 
@@ -57,18 +57,15 @@ export const SignupView = () => {
 
   return (
     <div>
-      <div>
-      {successMsg ? showToast && <ToastNotification message={successMsg} txtColor={'text-success'} />
-          : !errMsg && !successMsg ? showToast && <ToastNotification message={defaultErrorMessage} txtColor={'text-danger'} />
-            : null
-        } 
+      {successMsg ? showToast && <SuccessToast message={successMsg} txtColor={'text-success'} />
+        : !successMsg && !errMsg ? showToast && <ToastNotification message={defaultErrorMessage} txtColor={'text-danger'} />
+          : null  
+    } 
         {errMsg ? showToast && <ToastNotification message={errMsg} txtColor={'text-warning'} />
-            : !errMsg && !successMsg ? showToast && <ToastNotification message={defaultErrorMessage} txtColor={'text-danger'} />
+            : !errMsg && !username  ? showToast && <ToastNotification message={defaultErrorMessage} txtColor={'text-danger'} />
               : null
-        }
-      </div>
-   
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        } 
+      <Form noValidate validated={validated} onSubmit={handleSubmit} className="form">
         <Form.Group controlId="formUsername">
           <Form.Label>Username:</Form.Label>
           <Form.Control
