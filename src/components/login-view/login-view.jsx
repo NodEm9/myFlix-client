@@ -15,21 +15,23 @@ const LoginView = ({ onLoggedIn }) => {
 
   const toastMessage = {
     nonExist: "No such user found",
-    credential: "Somthing went wrong"
+    credential: "Somthing is not right"
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form validation
-    const Form = e.currentTarget;
-    if (Form.checkValidity() === false) {
-      e.stopPropagation();
-    }
 
     const data = {
       Username: username,
       Password: password
     };
+
+    // Form validation
+    const Form = e.currentTarget;
+    if (Form.checkValidity() === false) {
+      e.stopPropagation();
+      return;
+    }
 
     await fetch("https://movie-api-h54p.onrender.com/login", {
       method: "POST",
@@ -45,26 +47,25 @@ const LoginView = ({ onLoggedIn }) => {
           onLoggedIn(data.user, data.token);
           window.location.reload();
         } else {
-          setErrMsg(toastMessage.nonExist);
+          console.log("data with error", data);
+          setErrMsg(data.message);
           setShowToast(true);
         }
       }).catch((e) => {
-        setErrMsg(toastMessage.credential);
+        console.log(data.message);
+        setErrMsg(data.message);
         setShowToast(true);
-        throw new Error(e);
+        throw new Error(e)
       });
-    setValidated(true);
+      setValidated(true);
   };
-
 
   return (
     <div>
-      <div>
-        {errMsg !== toastMessage.credential ?
-          showToast && <ToastNotification message={toastMessage.credential} />
-          : showToast && <ToastNotification message={toastMessage.nonExist} />
-        }
-      </div>
+      {errMsg ?
+          showToast && <ToastNotification message={errMsg} txtColor={'text-danger'} />
+        : showToast && <ToastNotification message={toastMessage.nonExist} txtColor={'text-danger'}/>
+      }
       <Form noValidate validated={validated} onSubmit={handleSubmit} className=" mt-2">
         <Form.Group as={Col} controlId="formUsername">
           <Form.Label>Username:</Form.Label>
@@ -89,7 +90,7 @@ const LoginView = ({ onLoggedIn }) => {
           Submit
         </Button>
       </Form>
-    </div>
+    </div >
   );
 };
 
