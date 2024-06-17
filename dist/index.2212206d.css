@@ -19468,6 +19468,10 @@ body {
   height: 100vh;
 }
 
+.header {
+  margin-top: -5.5rem;
+}
+
 .card-container .movie-card {
   grid-row: span 4;
   grid-template-rows: subgrid;

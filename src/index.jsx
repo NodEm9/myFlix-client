@@ -3,7 +3,7 @@ import { MainView } from "./components/main-view/main-view";
 import { Navigationbar } from "./components/navigation/navbar";
 import Container from "react-bootstrap/Container";
 
-import "./scss/index.scss";
+import "./sass/index.scss";
 import Row from "react-bootstrap/Row";
 
 const App = () => {
