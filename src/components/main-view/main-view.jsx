@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { ToastNotification } from "../toast/toast";
 
 
 
@@ -91,6 +92,7 @@ export const MainView = () => {
     )
   };
 
+
   const searchMovies = (e) => {
     e.preventDefault();
     const searchValue = e.target.value;
@@ -100,8 +102,13 @@ export const MainView = () => {
     setMovies(filteredMovies);
   };
 
+
   return (
     <Row className="h-100 justify-content-md-center mt-md-5 pt-md-5">
+      {token && user ? (
+        <ToastNotification message={`Welcome ${user.Username}`} txtColor={"text-success"}/>
+      ) : null
+        }
       {!user ? (
         <Col md={5} >
           <h1 className="text-center mt-5 pt-5 fs-1-sm text-wrap fs-3" >
@@ -138,8 +145,8 @@ export const MainView = () => {
         </Row>
       ) : (
         <>
-          <Row className="pb-2  mt- h-50">
-            <Col>
+          <Row className="pb-2 h-50">
+            <Col className="header">
               <Button
                 variant="outline-primary"
                 className="float-end mb-1 mt-1 me-3"
@@ -150,7 +157,7 @@ export const MainView = () => {
             </Col>
           </Row>
           <Row className="pb-5 pt-0 justify-content-md-center">
-            <Col md={4}>
+            <Col md={4} className="header">
               <Form>
                 <Form.Control
                   type="text"
