@@ -139,7 +139,7 @@ export const MainView = () => {
             The movie list it empty!,
             <p>Please, be patient the movies are propably loading...</p>
           </Col>
-          <Col md={8} className="pb-5 h-100 justify-content-md-center">
+          <Col md={12} className="pb-5 h-100 justify-content-md-center">
                 <Skeleton />
           </Col>
         </Row>
