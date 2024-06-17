@@ -116,7 +116,7 @@ export const MainView = () => {
             className="bg-transparent fs-5 border-0 lead link-primary mt-md-3 mt-sm-2 mt-xm-1"
           >
             {showSignup ? "Already have an account? Login here." :
-              "Don't have account? Sign Up here."}
+              "New to myFlix?, signup here."}
           </Button>
         </Col>
       ) : selectedMovie ? (
@@ -133,9 +133,7 @@ export const MainView = () => {
             <p>Please, be patient the movies are propably loading...</p>
           </Col>
           <Col md={8} className="pb-5 h-100 justify-content-md-center">
-            {Array(12).fill(0).map((n) => (
-              <Skeleton key={n} />
-            ))}
+                <Skeleton />
           </Col>
         </Row>
       ) : (
