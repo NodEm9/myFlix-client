@@ -5,12 +5,14 @@ import { Navbar } from "./components/navigation/navbar";
 import Container from "react-bootstrap/Container";
 
 import "./scss/index.scss";
+import { FooterView } from "./components/footer-view/footer-view";
 
 const App = () => {
   return ( 
-    <Container className="App" > 
+    <Container className="App h-100 justify-content-center" > 
       <Navbar />
       <MainView />
+      <FooterView />
     </Container>
   );
 };

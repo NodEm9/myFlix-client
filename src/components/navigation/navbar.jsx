@@ -9,11 +9,17 @@ export const Navbar = () => {
   return (
     <Navbar className="bg-body p-0">
       <Container className='bg-body p-4'>
-        <Navbar.Brand href="#home" className="fw-bold fs-2">myFlix</Navbar.Brand>
+        <Navbar.Brand href="/" className="fw-bold fs-2">myFlix</Navbar.Brand>
         <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Collapse className="justify-content-end gap-3">
           <Navbar.Text>
-            Signed in as: <a href="#login">{loggedInUser}</a>
+            <a href="/movies">Movies</a>
+          </Navbar.Text>
+          <Navbar.Text>
+            <a href="/signup">Signup</a>
+          </Navbar.Text>
+          <Navbar.Text>
+            Signed in as: <a href="/login">{loggedInUser}</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>
