@@ -1,14 +1,19 @@
+import { Col, Row } from "react-bootstrap"
 import Card from "react-bootstrap/Card"
 
-const  Skeleton = () => {
+const Skeleton = () => {
   return (
-    <div  className="movie-card">
-      <div className="movie-card__header"></div>
-      <div className="movie-card__title"></div>
-      <div className="movie-card__description"></div>
-      <div className="movie-card__genre"></div>
-    </div>
-  ) 
+    <Row md={12} className="card-container">
+      <Col md={8} >
+        <Card className="skeleton">
+          <div className="skeleton__header"></div>
+          <div className="skeleton__title"></div>
+          <div className="skeleton__description"></div>
+          <div className="skeleton__genre"></div>
+        </Card> 
+      </Col>
+    </Row>
+  )
 }
 
 export default Skeleton
