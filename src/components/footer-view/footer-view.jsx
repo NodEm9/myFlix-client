@@ -1,20 +1,23 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
 
 export const FooterView = () => {
   return (
-    <Row className="bg-dark text-center p-3 pb-5 mt-5 d-md-flex d-sm-flex">
-      <Col>
-          <p className="text-muted text-white ">
-            Built by
-          <a href="https://github.com/NodEm9" target="_blank" className="text-white">
-            Emmanuel</a> for educational purposes.
-        </p>
+    <Row className="bg-dark text-white text-center p-3 pb-5 mt-5 d-md-flex d-sm-flex">
+      <Col className="p-5">
+         &copy; 2024 myFlix. All Rights Reserved.
       </Col>
-      <Col className="pb-5 d-md-flex d-sm-flex flex-column gap-3">
-            <a href="/" className="text-primary fs-2 text-decoration-none">myFlix</a>
-            <a href="/movies" className="text-white fs-6">Movies</a>
-            <a href="#" className="text-white fs-6">Categories</a>
+      <Col >
+        <Nav className="pb-5 d-md-flex d-sm-flex flex-column gap-3">
+          <Nav.Link href="/" className="text-primary fs-2 text-decoration-none">
+            myFlix</Nav.Link>
+          <Nav.Link href="/movies" className="text-white fs-6 text-decoration-none">
+            Movies</Nav.Link>
+          <Nav.Link href="/users" className="text-white fs-6 text-decoration-none">
+            Users</Nav.Link>
+        </Nav>
       </Col>
     </Row>
   );
