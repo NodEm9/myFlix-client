@@ -49,7 +49,7 @@ const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit} className="form mt-5">
+    <Form noValidate validated={validated} onSubmit={handleSubmit} className="form mt-5  pt-5">
       <Form.Group as={Col} controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
