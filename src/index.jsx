@@ -1,7 +1,5 @@
 import { createRoot } from "react-dom/client";
 import { MainView } from "./components/main-view/main-view";
-import { Navbar } from "./components/navigation/navbar";
-
 import Container from "react-bootstrap/Container";
 
 import "./scss/index.scss";
@@ -10,7 +8,6 @@ import { FooterView } from "./components/footer-view/footer-view";
 const App = () => {
   return ( 
     <Container className="App h-100 justify-content-center" > 
-      <Navbar />
       <MainView />
       <FooterView />
     </Container>
