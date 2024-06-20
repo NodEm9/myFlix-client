@@ -3,12 +3,16 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import  Col  from "react-bootstrap/Col";
 import "./login-view.scss"; 
+import { ToastNotification } from "../Toast/toast";
 
 
 const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,17 +41,24 @@ const LoginView = ({ onLoggedIn }) => {
           localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
           window.location.reload();
+          setSuccessMessage("Login successful!");
+          setShow(true);
         } else {
-          alert("No such user found. Please try again.");
+          setShow(true);
+          setErrMsg("Username or password is incorrect.");
         }
       }).catch((e) => {
-        alert("Something went wrong");
-        throw new Error(e);
+        setShow(false);
+        setErrMsg("Something went wrong.");
+        console.log(e);
       });
     
-      setValidated(true);
+    setValidated(true);
+    setUsername("");
+    setPassword("");
+    setShow(true);
   };
-
+ 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit} className="form mt-5  pt-5">
       <Form.Group as={Col} controlId="formUsername">
@@ -69,11 +80,15 @@ const LoginView = ({ onLoggedIn }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" className="mb-2 mt-2 float-end" >
+      <Button variant="primary" type="submit" className="mb-5 mt-2 float-end" >
         Submit
       </Button>
+      {errMsg ?
+        show && <ToastNotification message={errMsg} txtColor="text-danger" />
+        : show && <ToastNotification message={successMessage} txtColor="text-success" />  
+      }
     </Form>
-  );
+  ); 
 };
 
 export default LoginView;
