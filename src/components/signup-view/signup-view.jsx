@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { ToastNotification } from "../Toast/toast";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -8,6 +9,9 @@ export const SignupView = () => {
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
   const [validated, setValidated] = useState(false);
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,20 +36,27 @@ export const SignupView = () => {
       body: JSON.stringify(data)
     }).then((response) => {
       if (response.ok) {
-        alert("Signup successful!");
+        setSuccessMessage("Account created successfully!");
+        setShow(true);
         window.location.reload();
       } else {
-        alert("Something went wrong. Please try again.");
+        setErrMsg("Something went wrong.");
+        setShow(false);
       }
     }).catch((e) => {
       console.log(e);
     });
-
     setValidated(true);
+    setUsername("");
+    setPassword("");
+    setEmail("");
+    setBirthday("");
+    setShow(true);
   };
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -86,6 +97,20 @@ export const SignupView = () => {
       <Button variant="primary" type="submit" className="float-end mt-2">
         Submit
       </Button>
+      {errMsg ? (
+       show && <ToastNotification
+          setShow={show}
+          message={errMsg}
+          txtColor="text-danger"
+        />
+      ) : ( 
+        show && <ToastNotification
+          setShow={show}
+          message={successMessage}
+          txtColor="text-success"
+        />
+      )
+      }
     </Form>
   );
 };
