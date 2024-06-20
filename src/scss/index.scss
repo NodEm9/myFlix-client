@@ -21,27 +21,11 @@ $brand-color: #1c960c;
 
 }
 
-.ctaButtons {
+.switch-view {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.hero-text {
-  font-size: calc(36px + 2vmin);
-  font-weight: bold;
-  color: $primary;
-  margin-top: 1rem;
-}
-
-.hero-text p {
-  font-size: calc(12px + 1vmin);
-  font-weight: normal;
-  color: $tertiary;
-  text-align: center;
-  margin-top: 1rem;
-  text-wrap: wrap;
+  margin-top: -7rem;
+  background-color: transparent;
+  margin-bottom: 8rem;
 }
 
 .card-container .skeleton {
