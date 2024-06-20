@@ -3,6 +3,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import LoginView from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { ProfileView } from "../profile-view/profile-view";
 import Skeleton from "../loading/skeleton";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -20,8 +21,6 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [showSignup, setShowSignup] = useState(false);
 
-
-  // const mId = useId();
   useEffect(() => {
     if (!token) return;
 
@@ -31,7 +30,6 @@ export const MainView = () => {
       }
     }).then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const moviesFromAPI = data.map(movie => {
           return {
             _id: movie._id,
@@ -61,7 +59,6 @@ export const MainView = () => {
         setMovies(moviesFromAPI);
       });
   }, [token]);
-
 
   const searchMovies = (e) => {
     e.preventDefault();
@@ -95,7 +92,7 @@ export const MainView = () => {
                     <SignupView />
                     <button
                       onClick={() => setShowSignup(!showSignup)}
-                      className="bg-transparent border-0 lead link-primary mt-1 mt-sm-2 mt-xm-1 float-end"
+                      className="bg-transparent border-0 lead link-primary mt-1 mt-sm-2 mt-xm-1"
                     >
                       {!showSignup ? "Already have an account? Login here." :
                         <Navigate to="/login" />}
@@ -117,7 +114,7 @@ export const MainView = () => {
                     <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} />
                     <button
                       onClick={() => setShowSignup(!showSignup)}
-                      className="bg-transparent border-0 lead link-primary mt-sm-2 mt-xm-1 float-end"
+                      className="switch-view  border-0 lead link-primary "
                     >
                       {!showSignup ? "Don't have account? Sign Up here." :
                         <Navigate to="/signup" />}
@@ -141,6 +138,20 @@ export const MainView = () => {
                       <MovieView movies={movies} />
                     </Col>
                   </Row>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                    <Col md={12} className="pb-5">
+                      <ProfileView />
+                    </Col>
                 )}
               </>
             }
@@ -189,7 +200,9 @@ export const MainView = () => {
                     </Row>
                     {movies.map(movie => (
                       <Col md={3} key={movie._id} className="pb-5">
-                        <MovieCard movie={movie} />
+                        <MovieCard
+                          movie={movie}
+                        />
                       </Col>
                     ))}
                   </>
