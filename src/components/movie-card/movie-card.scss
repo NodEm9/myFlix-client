@@ -26,6 +26,16 @@ $brand-color: #1c960c;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   shape-margin: 20%;
 
+  .favorite-icon {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    color: $brand-color;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
   &:hover, &:focus {
     transform: scale(1.05);
   }
