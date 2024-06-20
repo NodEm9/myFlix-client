@@ -6269,6 +6269,16 @@
   box-shadow: 0 0 10px #0000001a;
 }
 
+.movie-card .favorite-icon {
+  color: #1c960c;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  font-size: 1.5rem;
+  top: 10px;
+  right: 10px;
+}
+
 .movie-card:hover, .movie-card:focus {
   transform: scale(1.05);
 }
@@ -12496,6 +12506,10 @@
   align-items: center;
   gap: 24px;
   display: flex;
+}
+
+.form {
+  margin-bottom: 8rem;
 }
 
 :root, [data-bs-theme="light"] {
@@ -25661,27 +25675,11 @@ textarea.form-control-lg {
   padding: 1rem;
 }
 
-.ctaButtons {
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
+.switch-view {
+  background-color: #0000;
+  margin-top: -7rem;
+  margin-bottom: 8rem;
   display: flex;
-}
-
-.hero-text {
-  color: #d54022;
-  margin-top: 1rem;
-  font-size: calc(36px + 2vmin);
-  font-weight: bold;
-}
-
-.hero-text p {
-  color: #333;
-  text-align: center;
-  text-wrap: wrap;
-  margin-top: 1rem;
-  font-size: calc(12px + 1vmin);
-  font-weight: normal;
 }
 
 .card-container .skeleton {
