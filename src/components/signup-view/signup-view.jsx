@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { SuccessToast, ToastNotification } from "../toast/toast";
+import { ToastNotification } from "../Toast/toast";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -9,15 +9,14 @@ export const SignupView = () => {
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
   const [validated, setValidated] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [show, setShow] = useState(false);
   const [errMsg, setErrMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
-
-  const defaultErrorMessage =  "Somthing went wrong"
-  
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setValidated(true);
     // Form validation
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -37,76 +36,83 @@ export const SignupView = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    }).then(response => response.json())
-      .then(response => {
-        if (response.ok) {
-          setSuccessMsg(response.message);
-          window.location.reload();
-          setShowToast(true);
-        }else {
-          setErrMsg(response.message);
-          setShowToast(true);
-        }
-      }).catch((e) => {
-        console.log(e?.response.message);
-        setErrMsg(e.message);
-      })
-
+    }).then((response) => {
+      if (response.ok) {
+        setSuccessMessage("Account created successfully!");
+        setShow(true);
+        window.location.reload();
+      } else {
+        setErrMsg("Something went wrong.");
+        setShow(false);
+      }
+    }).catch((e) => {
+      console.log(e);
+    });
     setValidated(true);
+    setUsername("");
+    setPassword("");
+    setEmail("");
+    setBirthday("");
+    setShow(true);
   };
 
   return (
-    <div>
-      {successMsg ? showToast && <SuccessToast message={successMsg} txtColor={'text-success'} />
-        : !successMsg && !errMsg ? showToast && <ToastNotification message={defaultErrorMessage} txtColor={'text-danger'} />
-          : null  
-    } 
-        {errMsg ? showToast && <ToastNotification message={errMsg} txtColor={'text-warning'} />
-            : !errMsg && !username  ? showToast && <ToastNotification message={defaultErrorMessage} txtColor={'text-danger'} />
-              : null
-        } 
-      <Form noValidate validated={validated} onSubmit={handleSubmit} className="form">
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            required
-            minLength={5}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="formEmail">
-          <Form.Label>Email:</Form.Label>
-          <Form.Control
-            type="email"
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBirthday">
-          <Form.Label>Birthday:</Form.Label>
-          <Form.Control
-            type="date"
-            value={birthday}
-            required
-            onChange={(e) => setBirthday(e.target.value)}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit" className="float-end mt-2">
-          Submit
-        </Button>
-      </Form>
-    </div>
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
+          type="text"
+          value={username}
+          required
+          minLength={5}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
+          type="password"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formEmail">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
+          type="email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formBirthday">
+        <Form.Label>Birthday:</Form.Label>
+        <Form.Control
+          type="date"
+          value={birthday}
+          required
+          onChange={(e) => setBirthday(e.target.value)}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit" className="float-end mt-2">
+        Submit
+      </Button>
+      {errMsg ? (
+       show && <ToastNotification
+          setShow={show}
+          message={errMsg}
+          txtColor="text-danger"
+        />
+      ) : ( 
+        show && <ToastNotification
+          setShow={show}
+          message={successMessage}
+          txtColor="text-success"
+        />
+      )
+      }
+    </Form>
   );
 };

@@ -1,18 +1,15 @@
 import { createRoot } from "react-dom/client";
 import { MainView } from "./components/main-view/main-view";
-import { Navigationbar } from "./components/navigation/navbar";
 import Container from "react-bootstrap/Container";
 
-import "./sass/index.scss";
-import Row from "react-bootstrap/Row";
+import "./scss/index.scss";
+import { FooterView } from "./components/footer-view/footer-view";
 
 const App = () => {
-  return (
-    <Container className="App h-100" >
-      <Row>
-        <Navigationbar />
-      </Row>
+  return ( 
+    <Container className="App h-100 justify-content-center" > 
       <MainView />
+      <FooterView />
     </Container>
   );
 };

@@ -1,25 +1,22 @@
-import Row from "react-bootstrap/Row"
+import { Col, Row } from "react-bootstrap"
 import Card from "react-bootstrap/Card"
 import { Col } from "react-bootstrap"
 import "./loading-skeleton.scss"
 
-const Skeleton = () => {
-  let loadingCard = new Array(8).fill(0)
 
+
+const Skeleton = () => {
   return (
-    <Row md={12} className="mt-5 justify-content-md-center">   
-      <Col md={5}  className="skeleton vstack gap-3">
-      {loadingCard.map((index) => (
-            <Card key={index} className="skeleton-card">
-              <Card.Body>
-                <Card.Title className="skeleton-title"></Card.Title>
-                <Card.Text className="skeleton-text"></Card.Text>
-              </Card.Body>
-        </Card>
-      ))}
-        </Col>
+    <Row md={12} className="card-container">
+      <Col md={8} >
+        <Card className="skeleton">
+          <div className="skeleton__header"></div>
+          <div className="skeleton__title"></div>
+          <div className="skeleton__description"></div>
+          <div className="skeleton__genre"></div>
+        </Card> 
+      </Col>
     </Row>
   )
-}
-
+  }
 export default Skeleton

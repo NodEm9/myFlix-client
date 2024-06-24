@@ -1,56 +1,47 @@
 @import '~bootstrap/scss/bootstrap.scss';
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-$primary: #44c133;
-$body-bg: #ffffff;
+$body-bg: #fff6f9;
 
-$primary-color: #d54022;
-$secondary-color: #ffff; 
-$tertiary-color: #333333; 
+$primary: #d54022; 
+$secondary: #ffff; 
+$tertiary: #333333; 
 $loading-color: #f5f5f5;
-$font-family: 'Lato', sans-serif;
+$font-family: 'Poppins', sans-serif;
 $active-color: #1efe00;
 $nav-background: #f2f2f2;
 $brand-color: #1c960c;
 
-
-body {
+* {
   font-family: $font-family;
-  background-color: $body-bg;
-  color: $tertiary-color;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
-.App {
-  height: 100vh;
+.main {
+  padding: 1rem;
 
 }
 
-.header {
-  margin-top: -5.5rem;
+.switch-view {
+  display: flex;
+  margin-top: -7rem;
+  background-color: transparent;
+  margin-bottom: 8rem;
 }
 
-.card-container .movie-card {
-  max-width: 80%; 
-  min-width: 10%;
-  grid-row: span 4;
-  grid-template-rows: subgrid;
+.card-container .skeleton {
+  width: 100%;
   animation: loading 2s;
 }
 
-.movie-card {  
+.skeleton {  
   display: grid;
-  grid-template-rows:  repeat(1, auto auto 1fr auto);
+  grid-template-rows: repeat(4, 1fr);
   width: 100%;
   height: 100%; 
-  background-color: $secondary-color;
+  background-color: $secondary;
+  gap: 3rem;
   border-radius: 6px;
-  font-size: calc(7px + 1vmin);
-  cursor: pointer;
   transition-property: transform 0.5s;
-  overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   shape-margin: 20%;
 
@@ -66,7 +57,7 @@ body {
   
     &__title {
       font-size: 1rem;
-      color: $tertiary-color;
+      color: $tertiary;
       text-align: left;
       padding: 0.2rem 0.8rem;
       font-weight: bold;
@@ -74,7 +65,7 @@ body {
 
   &__genre{   
     font-size: 1rem;
-    color: $tertiary-color;
+    color: $tertiary;
     text-align: right;
     padding: 0.5rem 1rem;   
   }
@@ -97,16 +88,21 @@ body {
  } 
 }
 
-.movie-card .movie-card__header {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  border-radius: 10px 10px 0 0;
-}
+@media all and (max-width: 768px) {
+  .main {
+    padding: 1rem;
+  }
 
-.movie-card .movie-card__header img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.2s;
+  .skeleton {
+    grid-template-rows: repeat(2, 1fr);
+  }
+  .hero-text {
+    font-size: calc(26px + 2vmin);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-text p {
+    font-size: calc(16px + 1vmin);
+  }
 }
