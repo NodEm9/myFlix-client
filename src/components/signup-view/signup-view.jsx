@@ -15,6 +15,8 @@ export const SignupView = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setValidated(true);
     // Form validation
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
