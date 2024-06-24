@@ -11,6 +11,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ToastNotification } from "../Toast/toast"; 
 
 
 export const MainView = () => {
@@ -212,6 +213,7 @@ export const MainView = () => {
           />
         </Routes>
       </Row>
+      <ToastNotification message={user ? `Welcome back ${user.Username}` : "You are logged out"} />
     </BrowserRouter>
   );
 };
