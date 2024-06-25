@@ -4,13 +4,17 @@ import Container from "react-bootstrap/Container";
 
 import "./scss/index.scss";
 import { FooterView } from "./components/footer-view/footer-view";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const App = () => {
   return ( 
-    <Container className="App h-100 justify-content-center" > 
-      <MainView />
+    <Provider store={store}>
+      <Container className="App h-100 justify-content-center" > 
+      <MainView /> 
       <FooterView />
-    </Container>
+      </Container> 
+    </Provider>
   );
 };
 
