@@ -27,6 +27,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
             ) : (
               <Navbar.Text className="m-3"><Nav.Link onClick={onLoggedOut}>Logout</Nav.Link></Navbar.Text>
             )}
+            <Navbar.Text className="m-3"><Nav.Link href="/profile">Profile</Nav.Link></Navbar.Text>
             <Navbar.Text className='bg-primary m-3 px-4 text-white d-flex align-items-center rounded-3 gap-2'>
               <Nav.Link href="/profile" className="text-white fs-5">Signed in as: {user ? user.Username : "Guest"}</Nav.Link>
             </Navbar.Text>
