@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { ToastNotification } from "../Toast/toast";
+import  ToastNotification  from "../toast/toast";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
