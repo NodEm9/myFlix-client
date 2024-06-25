@@ -7,21 +7,23 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
+
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
   const movie = movies.find((m) => m._id === movieId);
-
 
   return (
     <Row md={2}>
       <Col md={8}>
         <Col className="title">
           <h3 className="text-md-lg">Title:</h3>
-          <span className="fw-bolder fs-3" key={movie.Title}>{movie.Title}</span>
+          <span className="fw-bolder fs-3" key={movie._id}>
+            {movie.Title}
+          </span>
         </Col>
         <Col className="">
           <h3>Description: </h3>
-          <p className="" key={movie.Description}>
+          <p className="" key={movie._id}>
             {movie.Description}
           </p>
         </Col>
@@ -29,16 +31,17 @@ export const MovieView = ({ movies }) => {
           <h3>Genre: </h3>
           <span className="movie-genre">
             {movie.Genre.map(genre => (
-              <div key={genre._id}>
+              <div key={genre.name}>
                 <span>{genre.name}</span>
                 <p>{genre.description}</p>
               </div>
-            ))}</span>
+            ))}
+          </span>
         </Col>
         <Col>
           <h3>Director: </h3>
           {movie.Director.map(director => (
-            <div key={director._id} className="movie-director">
+            <div key={director.name} className="movie-director">
               <p><span className="fw-bold">Name:</span> {director.name}</p>
               <p className="director-bio">
                 <span className="fw-bold">Biblograph: </span>
@@ -52,26 +55,26 @@ export const MovieView = ({ movies }) => {
         <Col className="movie-actors">
           <h3>Actors: </h3>
           {movie.Actor.map(actor => (
-            <span key={actor._id}>
-              {`${actor}, `}
-            </span>
+            <div key={actor} className="mt-3">
+              <p>{actor.name}</p>
+            </div>
           ))}
         </Col>
         <Col className="d-flex align-items-center gap-3">
           <h3>ReleaseDate: </h3>
-          <div className="" key={movie.ReleaseDate}>
+          <div className="" key={movie._id}>
             {movie.ReleaseDate.slice(0, 10)}
           </div>
         </Col>
         <Col className="d-flex align-items-center gap-3">
           <h3>Rating: </h3>
-          <div key={movie.Rating}>
+          <div key={movie._id}>
             {movie.Rating}
           </div>
         </Col>
         <Col className="d-flex align-items-center gap-3">
           <h3>Featured: </h3>
-          <span key={movie.Featured}>
+          <span key={movie._id}>
             {movie.Featured ? `${movie.Featured}` : "No information available."}
           </span>
         </Col>
@@ -95,3 +98,4 @@ export const MovieView = ({ movies }) => {
     </Row>
   );
 };
+

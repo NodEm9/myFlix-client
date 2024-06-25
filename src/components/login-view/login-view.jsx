@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import  Col  from "react-bootstrap/Col";
 import "./login-view.scss"; 
-import { ToastNotification } from "../Toast/toast";
+import ToastNotification from "../toast/toast";
 
 
 const LoginView = ({ onLoggedIn }) => {

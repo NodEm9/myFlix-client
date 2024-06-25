@@ -2237,11 +2237,14 @@
 
 @media (width <= 991.98px) {
   .offcanvas-lg.offcanvas-start {
-    width: var(--bs-offcanvas-width);
-    border-right: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
-    top: 0;
-    left: 0;
-    transform: translateX(-100%);
+      width: var(--bs-offcanvas-width);
+      border-right: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+      top: 0;
+      left: 0;
+      /* Increase specificity or reorder CSS rules */
+      /* Example: */
+      /* width: var(--bs-offcanvas-width) !important; */
+  }ransform: translateX(-100%);
   }
 
   .offcanvas-lg.offcanvas-end {
@@ -12502,7 +12505,7 @@
   }
 }
 
-.title, .movie-actor {
+.title, .movie-actors {
   align-items: center;
   gap: 24px;
   display: flex;
@@ -25691,30 +25694,6 @@ textarea.form-control-lg {
   }
 }
 
-<<<<<<< HEAD
-body {
-  color: #333;
-  box-sizing: border-box;
-  background-color: #fff;
-  margin: 0;
-  padding: 0;
-  font-family: Lato, sans-serif;
-}
-
-.App {
-  height: 100vh;
-}
-
-.header {
-  margin-top: -5.5rem;
-}
-
-.card-container .movie-card {
-  grid-row: span 4;
-  grid-template-rows: subgrid;
-  min-width: 10%;
-  max-width: 80%;
-=======
 * {
   font-family: Poppins, sans-serif;
 }
@@ -25732,7 +25711,6 @@ body {
 
 .card-container .skeleton {
   width: 100%;
->>>>>>> new-branch
   animation: 2s loading;
 }
 
@@ -25741,12 +25719,14 @@ body {
   shape-margin: 20%;
   background-color: #fff;
   border-radius: 6px;
-<<<<<<< HEAD
+
   grid-template-rows: repeat(1, auto auto 1fr auto);
-=======
+
   grid-template-rows: repeat(4, 1fr);
+
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
   gap: 3rem;
->>>>>>> new-branch
   width: 100%;
   height: 100%;
   display: grid;
@@ -25756,6 +25736,7 @@ body {
 .skeleton__description {
   white-space: nowrap;
   text-overflow: ellipsis;
+  background-color: #fff6f9;
   justify-content: space-between;
   padding: 1rem;
   font-size: 1rem;
@@ -25764,16 +25745,16 @@ body {
 }
 
 .skeleton__title {
-  color: #333;
   text-align: left;
+  background-color: #fff6f9;
   padding: .2rem .8rem;
   font-size: 1rem;
   font-weight: bold;
 }
 
 .skeleton__genre {
-  color: #333;
   text-align: right;
+  background-color: #fff6f9;
   padding: .5rem 1rem;
   font-size: 1rem;
 }

@@ -4,20 +4,20 @@ import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export const ToastNotification = ({ message, txtColor}) => {
+ const ToastNotification = ({ message, txtColor}) => {
   const [show, setShow] = useState(true);
   const [tick, setTick] = useState(0);
 
   const toggleShow = () => setShow(!show);
 
   // Create a function to keep track of time
-  const getTimer = (time) => {
-    let date = new Date();
+  const getTimer =  (time) => {
+    let date = new Date(); 
     date.getTime(time).toLocaleString();
     setInterval(() => {
       if (show) {
         setTick(time + 1);
-      }
+      } 
     }, 6000)
     return time;
   };
@@ -46,3 +46,5 @@ export const ToastNotification = ({ message, txtColor}) => {
         </Row>
   );
 };
+
+export default ToastNotification;

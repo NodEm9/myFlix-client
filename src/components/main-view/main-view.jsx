@@ -11,7 +11,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { ToastNotification } from "../Toast/toast"; 
+import  ToastNotification  from "../toast/toast";
 
 
 export const MainView = () => {
@@ -126,7 +126,7 @@ export const MainView = () => {
             }
           />
           <Route
-            path="/movies/:movieId"
+            path="/movie/:movieId"
             element={
               <>
                 {!user ? (
@@ -136,7 +136,7 @@ export const MainView = () => {
                 ) : (
                   <Row className="pb-5">
                     <Col md={12} className="pb-5">
-                      <MovieView movies={movies} />
+                      <MovieView movies={movies} /> 
                     </Col>
                   </Row>
                 )}
@@ -150,9 +150,9 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : (
-                    <Col md={12} className="pb-5">
-                      <ProfileView />
-                    </Col>
+                  <Col md={12} className="pb-5">
+                    <ProfileView movies={movies}/>
+                  </Col>
                 )}
               </>
             }
@@ -170,9 +170,7 @@ export const MainView = () => {
                       <p>Please, be patient the movies are propably loading...</p>
                     </Col>
                     <Col md={8} className="pb-5 justify-content-md-center">
-                      {Array(12).fill(0).map((n) => (
-                        <Skeleton key={n} />
-                      ))}
+                        <Skeleton />
                     </Col>
                   </div>
                 ) : (
