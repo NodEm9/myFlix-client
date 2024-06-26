@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { UpdateUserData } from './updateUser';
 import { DeleteUser } from './delete-user';
 import { UserFavoriteMovies } from './favoriteMovie';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 
-export const ProfileView = ({ movies }) => {
-  let user = JSON.parse(localStorage.getItem('user'));
+export const ProfileView = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = localStorage.getItem("token");
+  const movies = useSelector((state) => state.movies.movies);
   const favoriteMovies = user === undefined ? [] : movies.filter((movie) => user.favoriteMovies.includes(movie._id));
-
 
   useEffect(() => {
     if (!token) return;
@@ -30,13 +30,16 @@ export const ProfileView = ({ movies }) => {
             Password: user.Password,
             Email: user.Email,
             Birthday: user.Birthday,
-            favoriteMovies: user.favoriteMovies
-          }
+            favoriteMovies: data.user.favoriteMovies
+          };
         }
       }).catch((error) => {
         console.log(error);
       });
+    
   }, [token, user]);
+
+
 
   return (
     <Row className="profile-view d-flex mt-4 h-100">
@@ -64,7 +67,7 @@ export const ProfileView = ({ movies }) => {
       </Col>
       <Row className='d-flex justify-content-center'>
         <Col className='my-4'>
-          <DeleteUser user={user} />
+          <DeleteUser  />
         </Col>
       </Row>
       <hr className='my-4' />
@@ -72,15 +75,11 @@ export const ProfileView = ({ movies }) => {
         <h2 className='fw-bold'>Favorite Movies</h2>
         <Col className='d-flex justify-content-center'>
           {favoriteMovies.length === 0 ?
-            <div className='fs-5'>No favorite movies yet!</div> :
-            favoriteMovies && <UserFavoriteMovies  favoriteMovies={favoriteMovies} />
+           <div className='fs-5'>No favorite movies yet!</div> 
+            :  favoriteMovies && <UserFavoriteMovies  favoriteMovies={favoriteMovies} /> 
           }
         </Col>
       </Row>
     </Row>
   );
-};
-
-ProfileView.propTypes = {
-  movies: PropTypes.array.isRequired
 };
