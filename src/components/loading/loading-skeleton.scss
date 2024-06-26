@@ -1,24 +1,73 @@
+@import '~bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-.skeleton {
-  display: grid;
-  grid-template-columns: auto repeat(4, 1fr);
-  width: 100%;  
-  height: 100%;
-  overflow: hidden;
-  padding-left: 4rem;
+$body-bg: #fff6f9;
 
-}
-.skeleton-card {
-  height: 100%;
+$primary: #d54022; 
+$secondary: #ffff; 
+$tertiary: #333333; 
+$loading-color: #f5f5f5;
+$font-family: 'Poppins', sans-serif;
+$active-color: #1efe00;
+$nav-background: #f2f2f2;
+$brand-color: #1c960c;
+
+
+.card-container .skeleton {
   width: 100%;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  padding: 8rem;
-  margin: 10px 0;
+  
 }
 
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.skeleton {  
+  width: 500px;
+  background-color: $secondary;
+  gap: 2rem;
+  padding: 1rem;
+  border-radius: 6px;
+  animation: loading 4s infinite;
+  transition-property: transform 0.5s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  shape-margin: 20%;
+
+    &__description {
+      display: block;
+      padding: 4rem;
+      background-color: $body-bg;
+      justify-content: space-between;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  
+    &__title {
+      font-size: 1rem;
+      text-align: left;
+      background-color: $body-bg;
+      padding: 0.2rem 0.8rem;
+      font-weight: bold;
+    }
+
+  &__genre{   
+    font-size: 1rem;
+    background-color: $body-bg;
+    text-align: right;
+    padding: 0.5rem 1rem;   
+  }
+
+  &:hover, &:focus {
+    transform: scale(1.05);
+    animation: ease-in-out loading 2s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-color: #f5f5f5;
+    }
+    50% {
+      background-color: #e5e5e5;
+    }
+    100% {
+      background-color: #ffffff;
+    }
+ } 
 }
