@@ -1,5 +1,4 @@
-import { useState, useEffect, useId } from "react";
-import { MovieCard } from "../movie-card/movie-card";
+import { useState, useEffect } from "react";
 import { MovieView } from "../movie-view/movie-view";
 import LoginView from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
@@ -7,20 +6,25 @@ import { ProfileView } from "../profile-view/profile-view";
 import Skeleton from "../loading/skeleton";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import  ToastNotification  from "../toast/toast";
+import ToastNotification from "../toast/toast";
+import { useSelector, useDispatch } from "react-redux";
+import { setMovies } from "../../redux/movies/movieSlice";
+import MoviesList from "../movie-list/movie-list";
 
 
 export const MainView = () => {
   const storedUser = localStorage.getItem("user");
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser ? JSON.parse(storedUser) : null);
-  const [token, setToken] = useState(storedToken ? storedToken : null);
-  const [movies, setMovies] = useState([]);
+  const [token, setToken] = useState(storedToken || null);
+  const movies = useSelector((state) => state.movies.movies);
+
   const [showSignup, setShowSignup] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!token) return;
@@ -31,7 +35,7 @@ export const MainView = () => {
       }
     }).then((response) => response.json())
       .then((data) => {
-        const moviesFromAPI = data.map(movie => {
+        const moviesFromApi = data.map(movie => {
           return {
             _id: movie._id,
             ImageUrl: movie.ImageUrl,
@@ -53,22 +57,14 @@ export const MainView = () => {
             Featured: movie.Featured
           }
         });
-        if (moviesFromAPI.length === 0) {
-          return <div className="main-view">The list is empty!</div>;
-        }
 
-        setMovies(moviesFromAPI);
+        dispatch(setMovies(moviesFromApi));
+        setShowToast(true);
+      }).catch((e) => {
+        console.log(e);
+        
       });
   }, [token]);
-
-  const searchMovies = (e) => {
-    e.preventDefault();
-    const searchValue = e.target.value;
-    const filteredMovies = movies.filter((movie) => {
-      return movie.Title.toLowerCase().includes(searchValue.toLowerCase());
-    });
-    setMovies(filteredMovies);
-  };
 
   // This useEffect hook will run when the showSignup state changes
   useEffect(() => {
@@ -112,7 +108,7 @@ export const MainView = () => {
                 ) : (
                   <Col md={5} >
                     <h1 className="text-center  mt-4 fs-1-sm text-wrap fs-3" >Welcome to myFlix</h1>
-                    <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} />
+                    <LoginView />
                     <button
                       onClick={() => setShowSignup(!showSignup)}
                       className="switch-view  border-0 lead link-primary "
@@ -136,7 +132,7 @@ export const MainView = () => {
                 ) : (
                   <Row className="pb-5">
                     <Col md={12} className="pb-5">
-                      <MovieView movies={movies} /> 
+                      <MovieView movies={movies} />
                     </Col>
                   </Row>
                 )}
@@ -151,7 +147,7 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={12} className="pb-5">
-                    <ProfileView movies={movies}/>
+                    <ProfileView />
                   </Col>
                 )}
               </>
@@ -164,54 +160,28 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <div>
+                  <>
                     <Col md={12} className="text-md-center">
                       The movie list it empty!,
                       <p>Please, be patient the movies are propably loading...</p>
                     </Col>
-                    <Col md={8} className="pb-5 justify-content-md-center">
-                        <Skeleton />
+                    <Col md={12} className="pb-5 justify-content-md-center">
+                      <Skeleton />
                     </Col>
-                  </div>
+                  </>
                 ) : (
                   <>
-                    <Row className="pb-2">
-                      <Col>
-                        <Button
-                          variant="outline-primary"
-                          className="float-end mb-2 me-3"
-                          onClick={() => { setUser(null); setToken(null); localStorage.clear(); }
-                          }>
-                          logout
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Row className="pb-5 mb- justify-content-md-center">
-                      <Col md={4}>
-                        <Form>
-                          <Form.Control
-                            type="text"
-                            placeholder="Search for a movie"
-                            onChange={searchMovies}
-                          />
-                        </Form>
-                      </Col>
-                    </Row>
-                    {movies.map(movie => (
-                      <Col md={3} key={movie._id} className="pb-5">
-                        <MovieCard
-                          movie={movie}
-                        />
-                      </Col>
-                    ))}
+                    <Col className="pb-5">
+                      <MoviesList />
+                    </Col>
                   </>
                 )}
               </>
-            }
+            } 
           />
         </Routes>
       </Row>
-      <ToastNotification message={user ? `Welcome back ${user.Username}` : "You are logged out"} />
+      {showToast && <ToastNotification message={user ? `Welcome back ${user.Username}` : "You are logged out"} />}
     </BrowserRouter>
   );
 };
