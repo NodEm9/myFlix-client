@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import  Col  from "react-bootstrap/Col";
-import "./login-view.scss"; 
+import Col from "react-bootstrap/Col";
+import "./login-view.scss";
 import ToastNotification from "../toast/toast";
+import { setUser, setLoggedIn, setToken } from "../../redux/user/userSlice";
+import { useDispatch } from "react-redux";
 
 
-const LoginView = ({ onLoggedIn }) => {
+
+const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
@@ -14,20 +17,24 @@ const LoginView = ({ onLoggedIn }) => {
   const [errMsg, setErrMsg] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  const dispatch = useDispatch();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = {
-      Username: username,
-      Password: password
-    };
-
+    setShow(false);
+    setValidated(true);
     // Form validation
     const Form = e.currentTarget;
     if (Form.checkValidity() === false) {
       e.stopPropagation();
       return;
     }
+
+    const data = {
+      Username: username,
+      Password: password
+    };
 
     await fetch("https://movie-api-h54p.onrender.com/login", {
       method: "POST",
@@ -37,15 +44,21 @@ const LoginView = ({ onLoggedIn }) => {
       body: JSON.stringify(data)
     }).then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data.user) {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          localStorage.setItem("token", data.token);
-          onLoggedIn(data.user, data.token);
+          localStorage.setItem("user", JSON.stringify(data.user)),
+            localStorage.setItem("token", data.token),
+            dispatch(
+              setUser(data.user),
+              setToken(data.token),
+              setLoggedIn(true)
+            );
           window.location.reload();
           setSuccessMessage("Login successful!");
-          setShow(true);
+          setShow(true); 
+
         } else {
-          setShow(true);
+          setShow(false);
           setErrMsg("Username or password is incorrect.");
         }
       }).catch((e) => {
@@ -53,15 +66,15 @@ const LoginView = ({ onLoggedIn }) => {
         setErrMsg("Something went wrong.");
         console.log(e);
       });
-    
-    setValidated(true);
+
+    setValidated(false);
     setUsername("");
     setPassword("");
     setShow(true);
   };
- 
+
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit} className="form mt-5  pt-5">
+    <Form noValidate validated={validated} onSubmit={handleSubmit} className="form mt-5 pt-5">
       <Form.Group as={Col} controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -70,6 +83,7 @@ const LoginView = ({ onLoggedIn }) => {
           required
           minLength={5}
           onChange={(e) => setUsername(e.target.value)}
+          className="mb-3"
         />
       </Form.Group>
       <Form.Group controlId="formPassword">
@@ -86,10 +100,10 @@ const LoginView = ({ onLoggedIn }) => {
       </Button>
       {errMsg ?
         show && <ToastNotification message={errMsg} txtColor="text-danger" />
-        : show && <ToastNotification message={successMessage} txtColor="text-success" />  
+        : show && <ToastNotification message={successMessage} txtColor="text-success" />
       }
     </Form>
-  ); 
+  );
 };
 
 export default LoginView;
