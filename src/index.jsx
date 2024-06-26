@@ -2,11 +2,13 @@ import { createRoot } from "react-dom/client";
 import { MainView } from "./components/main-view/main-view";
 import Container from "react-bootstrap/Container";
 
-import "./scss/index.scss";
 import { FooterView } from "./components/footer-view/footer-view";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import "./sass/index.scss";
+
+ 
 const App = () => {
   return ( 
     <Provider store={store}>
