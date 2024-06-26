@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import  ToastNotification  from "../toast/toast"; 
+import ToastNotification from "../toast/toast"; 
+
 
 export const UpdateUserData = () => {
   const storedUser = localStorage.getItem("user");
@@ -20,6 +21,9 @@ export const UpdateUserData = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setShow(false);
+    setValidated(true);
     // Form validation
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -33,7 +37,7 @@ export const UpdateUserData = () => {
       Birthday: birthday
     };
 
-    await fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}`, {
+     fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +56,7 @@ export const UpdateUserData = () => {
     }).catch((e) => {
       console.log(e);
     });
-    setValidated(true);
+    setValidated(false);
     setUser(data)
     setToken(token);
     setUsername("");
@@ -60,7 +64,7 @@ export const UpdateUserData = () => {
     setEmail("");
     setBirthday("");
     setShow(true);
-  };
+  }; 
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
