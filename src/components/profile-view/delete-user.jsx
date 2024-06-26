@@ -1,15 +1,17 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import  ToastNotification  from "../toast/toast";
+import ToastNotification from "../toast/toast";
+import { setDeleteUser } from "../../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-export const DeleteUser = ({ user }) => {
-  user = localStorage.getItem("user");
-  user = user ? JSON.parse(user) : null;
-  const storedToken = localStorage.getItem("token");
-  const [token, setToken] = useState(storedToken ? storedToken : null);
+export const DeleteUser = () => {
+  const user = useSelector((state) => state.user.user);
+  const token = useSelector((state) => state.user.token);
   const [show, setShow] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
+
+  const dispatch = useDispatch();
 
 
   const handleDelete = async (e) => {
@@ -21,8 +23,10 @@ export const DeleteUser = ({ user }) => {
       }
     }).then((response) => {
       if (response.ok) {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
+        dispatch(setDeleteUser({
+          user: localStorage.removeItem("user"),
+          token: localStorage.removeItem("token")
+        }));
         setSuccessMessage("Account deleted successfully!");
         window.location.href = "/";
         setShow(true);
