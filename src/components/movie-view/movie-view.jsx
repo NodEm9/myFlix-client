@@ -6,10 +6,13 @@ import Button from "react-bootstrap/Button";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
-export const MovieView = ({ movies }) => {
+export const MovieView = () => {
+  const movies = useSelector((state) => state.movies.movies);
   const { movieId } = useParams();
+  
   const movie = movies.find((m) => m._id === movieId);
 
   return (
@@ -92,7 +95,7 @@ export const MovieView = ({ movies }) => {
           src={movie.ImageUrl}
           key={movie.ImageUrl}
           alt="movie-poster"
-          className="w-100 h-80 rounded-3 shadow-sm "
+          className="w-100 h-75 rounded-3 shadow-sm "
         />
       </Col>
     </Row>
