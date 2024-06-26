@@ -16,6 +16,7 @@ export const SignupView = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     setValidated(true);
     // Form validation
     const form = e.currentTarget;
@@ -46,9 +47,10 @@ export const SignupView = () => {
         setShow(false);
       }
     }).catch((e) => {
+      setShow(false);
       console.log(e);
     });
-    setValidated(true);
+    setValidated(false);
     setUsername("");
     setPassword("");
     setEmail("");
@@ -58,7 +60,6 @@ export const SignupView = () => {
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-    
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
