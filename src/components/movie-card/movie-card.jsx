@@ -13,9 +13,7 @@ export const MovieCard = ({ movie }) => {
   const token = localStorage.getItem('token');
   const [isFavorited, setIsFavorited] = useState(false);
 
-  function addToFavorite() {
-    if (!user || !token) return;
-
+  const addToFavorite = async () => {
     setIsFavorited(false);
 
     fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}/movies/${movie._id}`, {
@@ -27,20 +25,16 @@ export const MovieCard = ({ movie }) => {
     }).then((response) => response.json())
       .then((data) => {
         if (data) {
-          console.log(data);
-          setIsFavorited(movie._id);
-          alert('Favorite added');
+          setIsFavorited(true);
         }
       }).catch((error) => {
         console.log(error);
       });
-    setIsFavorited(true);
+    setIsFavorited(false);
   }
 
 
-  const removeFavoriteMovie = () => {
-    if (!user || !token) return;
-
+  const removeFavoriteMovie = async () => {
     setIsFavorited(true);
 
     fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}/movies/${movie._id}`, {
@@ -55,33 +49,14 @@ export const MovieCard = ({ movie }) => {
           console.log(data);
           setIsFavorited(false);
         }
-        alert('Favorite deleted');
       }).catch((error) => {
-        console.log(error);
+        console.log(error)
+        setIsFavorited(false); 
       });
     setIsFavorited(false);
   };
 
-
-  const toggleIcon = () => {
-    if (!isFavorited) {
-      return (
-        <Card.Img
-          className='favorite-icon'
-          src={favoriteIcon2}
-          onClick={addToFavorite}
-        />
-      )
-    } else {
-      return (
-        <Card.Img
-          className='favorite-icon'
-          src={favoriteIcon}
-          onClick={removeFavoriteMovie}
-        />
-      )
-    }
-  }
+ 
 
   return (
     <Card className='h-100 movie-card'>
@@ -89,7 +64,17 @@ export const MovieCard = ({ movie }) => {
       <Card.Body>
         <Col className='d-flex justify-content-between'>
           <Card.Title className='fw-bold mb-3'>{movie.Title}</Card.Title>
-          {toggleIcon()}
+          {!isFavorited ? (
+            <Card.Img
+              className='favorite-icon'
+              src={favoriteIcon2}
+              onClick={addToFavorite}
+            />) : (
+            <Card.Img
+              className='favorite-icon'
+              src={favoriteIcon}
+              onClick={removeFavoriteMovie}
+            />)}
         </Col>
         <Card.Text>{movie.Description}</Card.Text>
         <Col className='d-flex justify-content-between align-items-center mt-3'>
