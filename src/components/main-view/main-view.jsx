@@ -51,7 +51,7 @@ export const MainView = () => {
               birthyear: movie.Director.birthyear,
               deathyear: movie.Director.deathyear
             }],
-            Actor: movie.Actor.map(actor => `${actor.name}, `),
+            Actor: movie.Actor,
             ReleaseDate: movie.ReleaseDate,
             Rating: movie.Rating,
             Featured: movie.Featured
@@ -131,7 +131,7 @@ export const MainView = () => {
                   <Col >List is Empty</Col>
                 ) : (
                   <Row className="pb-5">
-                    <Col md={12} className="pb-5">
+                    <Col md={12} className="">
                       <MovieView movies={movies} />
                     </Col>
                   </Row>

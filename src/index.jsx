@@ -8,7 +8,6 @@ import store from "./store";
 
 import "./sass/index.scss";
 
- 
 const App = () => {
   return ( 
     <Provider store={store}>

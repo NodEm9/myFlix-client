@@ -1,5 +1,13 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
+.movie-view h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.movie-view-img {
+  margin-top: -1.5rem;
+}
+
 .title {
   display: flex;
   gap: 24px;
@@ -13,7 +21,26 @@
   align-items: center;
 }
 
+.similar-movies {
+  margin-top: 2rem;
+
+  h2 {
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+&__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+}
+
 @media all and (max-width: 768px){
+  .movie-view-img {
+    margin-top: -1.5rem;
+  }
+
   .title {
     margin-top: 1rem;    
   }
@@ -23,5 +50,9 @@
     align-items: start;
     flex-direction: column;
     gap: 0;
+  }
+
+  .similar-movies__list {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

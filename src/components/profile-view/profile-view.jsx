@@ -7,36 +7,28 @@ import { UserFavoriteMovies } from './favoriteMovie';
 import { useSelector } from 'react-redux';
 
 
+
 export const ProfileView = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  const token = localStorage.getItem("token");
   const movies = useSelector((state) => state.movies.movies);
-  const favoriteMovies = user === undefined ? [] : movies.filter((movie) => user.favoriteMovies.includes(movie._id));
+  const user = useSelector((state) => state.user.user);
+  const token = useSelector((state) => state.user.token);
+  const favoriteMovies = movies.filter((movie) => user.favoriteMovies.includes(movie._id));
 
   useEffect(() => {
-    if (!token) return;
-
-    fetch(`https://myflix-app-led6.onrender.com/${user.Username}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    function getUser() {
+      if (!token) return;
+      if (!user) return;
+      console.log(user);
+     
+      return {
+        Username: user.Username,
+        Password: user.Password,
+        Email: user.Email,
+        Birthday: user.Birthday,
+      };
       }
-    }).then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.user) {
-          return {
-            Username: user.Username,
-            Password: user.Password,
-            Email: user.Email,
-            Birthday: user.Birthday,
-            favoriteMovies: data.user.favoriteMovies
-          };
-        }
-      }).catch((error) => {
-        console.log(error);
-      });
-    
+    getUser();
+
   }, [token, user]);
 
 
@@ -74,10 +66,7 @@ export const ProfileView = () => {
       <Row className='d-flex justify-content-center'>
         <h2 className='fw-bold'>Favorite Movies</h2>
         <Col className='d-flex justify-content-center'>
-          {favoriteMovies.length === 0 ?
-           <div className='fs-5'>No favorite movies yet!</div> 
-            :  favoriteMovies && <UserFavoriteMovies  favoriteMovies={favoriteMovies} /> 
-          }
+          <UserFavoriteMovies favoriteMovies={favoriteMovies} /> 
         </Col>
       </Row>
     </Row>

@@ -67,7 +67,7 @@ export const UpdateUserData = () => {
   }; 
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form noValidate validated={validated} onSubmit={handleSubmit} className="px-md-5 ">
       <h2 className='fw-bold'>Update Profile</h2>
       <Form.Group controlId="formUsername">
         <Form.Label className="invisible">Username:</Form.Label>

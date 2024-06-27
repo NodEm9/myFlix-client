@@ -5,12 +5,11 @@ import './movie-card.scss';
 import { useState } from 'react';
 import favoriteIcon from '../../img/favorite-icon.png';
 import favoriteIcon2 from '../../img/favorite-icon2.png';
-
+import { useSelector } from 'react-redux';
 
 export const MovieCard = ({ movie }) => {
-  let user = localStorage.getItem('user');
-  user = user ? JSON.parse(user) : null;
-  const token = localStorage.getItem('token');
+  const user = useSelector((state) => state.user.user);
+  const token = useSelector((state) => state.user.token);
   const [isFavorited, setIsFavorited] = useState(false);
 
   const addToFavorite = async () => {
@@ -25,6 +24,7 @@ export const MovieCard = ({ movie }) => {
     }).then((response) => response.json())
       .then((data) => {
         if (data) {
+          console.log(data);
           setIsFavorited(true);
         }
       }).catch((error) => {
@@ -51,12 +51,12 @@ export const MovieCard = ({ movie }) => {
         }
       }).catch((error) => {
         console.log(error)
-        setIsFavorited(false); 
+        setIsFavorited(false);
       });
     setIsFavorited(false);
-  };
+  };   
 
- 
+
 
   return (
     <Card className='h-100 movie-card'>
@@ -64,7 +64,7 @@ export const MovieCard = ({ movie }) => {
       <Card.Body>
         <Col className='d-flex justify-content-between'>
           <Card.Title className='fw-bold mb-3'>{movie.Title}</Card.Title>
-          {!isFavorited ? (
+          {!isFavorited && token ? (
             <Card.Img
               className='favorite-icon'
               src={favoriteIcon2}

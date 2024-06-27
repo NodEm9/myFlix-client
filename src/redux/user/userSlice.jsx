@@ -7,7 +7,7 @@ const userSlice = createSlice({
     user: JSON.parse(localStorage.getItem("user")),
     token: localStorage.getItem("token"),
     deleteUser: null,
-    loggedIn: Boolean(localStorage.getItem("token"))
+    loggedIn: Boolean(localStorage.getItem("token")),
   },
   reducers: {
     setUser: (state, action) => {
@@ -22,7 +22,7 @@ const userSlice = createSlice({
 
     setLoggedIn: (state, action) => {
       state.loggedIn = action.payload;
-    }
+    },
   },
 });
 
@@ -30,6 +30,7 @@ export const {
   setUser,
   setToken,
   setDeleteUser,
-  setLoggedIn } = userSlice.actions;
+  setLoggedIn,
+} = userSlice.actions;
 
 export default userSlice.reducer;

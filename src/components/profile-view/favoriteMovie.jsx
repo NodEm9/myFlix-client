@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 
 
 export const UserFavoriteMovies = ({ favoriteMovies }) => {
+
   return (
     <Row className="favorite-movies d-flex mt-4 h-100">
       {favoriteMovies.map((movie) => (
-        <Col md={3} key={movie._id}>
+        <Col md={3} key={movie._id} className='p-3'>
           <MovieCard
             movie={movie}
           />
@@ -17,7 +18,7 @@ export const UserFavoriteMovies = ({ favoriteMovies }) => {
     </Row>
   );
 }
- 
+
 UserFavoriteMovies.propTypes = {
   favoriteMovies: PropTypes.array.isRequired
 };

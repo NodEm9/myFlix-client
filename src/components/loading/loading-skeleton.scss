@@ -37,14 +37,16 @@ $brand-color: #1c960c;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+      border-radius: 10px;
     }
   
     &__title {
       font-size: 1rem;
       text-align: left;
       background-color: $body-bg;
-      padding: 0.2rem 0.8rem;
+      padding: 0.2rem 1rem;
       font-weight: bold;
+      border-radius: 10px;
     }
 
   &__genre{   
@@ -52,6 +54,7 @@ $brand-color: #1c960c;
     background-color: $body-bg;
     text-align: right;
     padding: 0.5rem 1rem;   
+    border-radius: 10px;
   }
 
   &:hover, &:focus {
