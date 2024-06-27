@@ -31,7 +31,7 @@ export const SignupView = () => {
       Birthday: birthday
     };
 
-    await fetch("https://movie-api-h54p.onrender.com/users", {
+    await fetch("https://myflix-app-led6.onrender.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

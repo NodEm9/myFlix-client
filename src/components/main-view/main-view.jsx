@@ -29,7 +29,7 @@ export const MainView = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch("https://movie-api-h54p.onrender.com/movies", {
+    fetch("https://myflix-app-led6.onrender.com/movies", {
       headers: {
         Authorization: `Bearer ${token}`
       }

@@ -36,7 +36,7 @@ const LoginView = () => {
       Password: password
     };
 
-    await fetch("https://movie-api-h54p.onrender.com/login", {
+    await fetch("https://myflix-app-led6.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

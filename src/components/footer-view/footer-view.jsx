@@ -18,7 +18,7 @@ export const FooterView = () => {
             Home</Nav.Link>
           <Nav.Link href="/profile" className="text-white fs-6 text-decoration-none">
             Users</Nav.Link>
-          <Nav.Link href={"https://movie-api-h54p.onrender.com/documentation.html"} target="_blank" className="text-white fs-6 text-decoration-none">
+          <Nav.Link href={"https://myflix-app-led6.onrender.com/documentation.html"} target="_blank" className="text-white fs-6 text-decoration-none">
            API Documentation</Nav.Link>
           
         </Nav>

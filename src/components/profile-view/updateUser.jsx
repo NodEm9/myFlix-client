@@ -37,7 +37,7 @@ export const UpdateUserData = () => {
       Birthday: birthday
     };
 
-     fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}`, {
+     fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

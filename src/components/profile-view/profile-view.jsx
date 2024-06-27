@@ -16,7 +16,7 @@ export const ProfileView = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}`, {
+    fetch(`https://myflix-app-led6.onrender.com/${user.Username}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'

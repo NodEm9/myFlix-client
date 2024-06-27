@@ -16,7 +16,7 @@ export const DeleteUser = () => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    await fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}`, {
+    await fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`

@@ -16,7 +16,7 @@ export const MovieCard = ({ movie }) => {
   const addToFavorite = async () => {
     setIsFavorited(false);
 
-    fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}/movies/${movie._id}`, {
+    fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${movie._id}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ export const MovieCard = ({ movie }) => {
   const removeFavoriteMovie = async () => {
     setIsFavorited(true);
 
-    fetch(`https://movie-api-h54p.onrender.com/users/${user.Username}/movies/${movie._id}`, {
+    fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${movie._id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`
