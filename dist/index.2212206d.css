@@ -6255,22 +6255,30 @@
   }
 }
 
-.movie-view {
-  flex-direction: row-reverse;
-  display: flex;
-}
-
 .title {
   align-items: center;
   gap: 24px;
-  padding-top: 6px;
+  margin-top: 0;
   display: flex;
 }
 
 .movie-actors {
   align-items: center;
-  gap: 24px;
+  gap: 10px;
   display: flex;
+}
+
+@media (width <= 768px) {
+  .title {
+    margin-top: 1rem;
+  }
+
+  .movie-actors {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 0;
+  }
 }
 
 .form {

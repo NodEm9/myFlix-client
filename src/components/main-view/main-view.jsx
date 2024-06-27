@@ -51,7 +51,7 @@ export const MainView = () => {
               birthyear: movie.Director.birthyear,
               deathyear: movie.Director.deathyear
             }],
-            Actor: movie.Actor,
+            Actor: movie.Actor.map(actor => `${actor.name}, `),
             ReleaseDate: movie.ReleaseDate,
             Rating: movie.Rating,
             Featured: movie.Featured

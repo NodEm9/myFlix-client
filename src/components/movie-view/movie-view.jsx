@@ -16,11 +16,11 @@ export const MovieView = () => {
   const movie = movies.find((m) => m._id === movieId);
 
   return (
-    <Row md={2}>
-      <Col md={8}>
-        <Col className="title">
-          <h3 className="text-md-lg">Title:</h3>
-          <span className="fw-bolder fs-3" key={movie._id}>
+    <Row md={2} className="movie-view flex-md-row flex-column-reverse">
+      <Col md={8}> 
+        <Col className="title text-md-lg">
+          <h3 >Title:</h3>
+          <span className="fw-bolder pb-2 fs-3" key={movie._id}>
             {movie.Title}
           </span>
         </Col>
@@ -56,12 +56,7 @@ export const MovieView = () => {
           ))}
         </Col>
         <Col className="movie-actors">
-          <h3>Actors: </h3>
-          {movie.Actor.map(actor => (
-            <div key={actor} className="mt-3">
-              <p>{actor.name}</p>
-            </div>
-          ))}
+          <h3>Actors: </h3> {movie.Actor}
         </Col>
         <Col className="d-flex align-items-center gap-3">
           <h3>ReleaseDate: </h3>
@@ -95,7 +90,7 @@ export const MovieView = () => {
           src={movie.ImageUrl}
           key={movie.ImageUrl}
           alt="movie-poster"
-          className="w-100 h-75 rounded-3 shadow-sm "
+          className="w-100 h-75 rounded-3 shadow-sm"
         />
       </Col>
     </Row>
