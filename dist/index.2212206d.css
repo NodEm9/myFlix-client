@@ -38187,6 +38187,10 @@ textarea.form-control-lg {
   font-family: Poppins, sans-serif;
 }
 
+.home {
+  display: block;
+}
+
 .main {
   padding: 1rem;
 }
@@ -38199,6 +38203,10 @@ textarea.form-control-lg {
 }
 
 @media (width <= 768px) {
+  .home {
+    display: none;
+  }
+
   .main {
     padding: 1rem;
   }

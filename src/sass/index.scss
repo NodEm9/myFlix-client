@@ -16,6 +16,10 @@ $brand-color: #1c960c;
   font-family: $font-family;
 }
 
+.home {
+  display: block;
+}
+
 .main {
   padding: 1rem;
 
@@ -29,8 +33,11 @@ $brand-color: #1c960c;
 }
 
 
-
 @media all and (max-width: 768px) {
+  .home {
+    display: none;
+  }
+
   .main {
     padding: 1rem;
   }
@@ -38,6 +45,7 @@ $brand-color: #1c960c;
   .skeleton {
     grid-template-rows: repeat(2, 1fr);
   }
+
   .hero-text {
     font-size: calc(26px + 2vmin);
     text-align: center;

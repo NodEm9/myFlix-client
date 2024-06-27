@@ -13,7 +13,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
           <Navbar.Brand href='/' className="d-md-flex align-items-center fw-bold fs-2">
             myFlix
           </Navbar.Brand>
-          <Navbar.Text className="fs-5">
+          <Navbar.Text className="home fs-5">
             <Nav.Link href="/">Home</Nav.Link>
           </Navbar.Text>
         </Nav>

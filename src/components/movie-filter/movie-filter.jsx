@@ -17,7 +17,7 @@ const MovieFilter = () => {
           value={filter}
           onChange={(e) => dispatch(setFilter(e.target.value))}
           placeholder="Search movies..."
-          className="p-3 w-50 mx-auto"
+          className="p-3 w-75 min-vw-auto mx-auto"
         />
       </Form.Group>
     </Form>
