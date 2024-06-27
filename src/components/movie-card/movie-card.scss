@@ -42,3 +42,9 @@ $brand-color: #1c960c;
   }
 
 }
+
+@media all and (max-width: 768px){
+  .movie-card {
+    grid-template-rows: auto auto auto 1fr auto;
+  }
+}

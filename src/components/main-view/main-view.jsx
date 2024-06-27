@@ -131,7 +131,7 @@ export const MainView = () => {
                   <Col >List is Empty</Col>
                 ) : (
                   <Row className="pb-5">
-                    <Col md={12} className="">
+                    <Col md={12}>
                       <MovieView movies={movies} />
                     </Col>
                   </Row>

@@ -8,7 +8,7 @@ const SimilarMovies = ({ movies }) => {
   return (
     <Row className="similar-movies">
       <h2>Similar Movies</h2>
-      <Col md={8} className="similar-movies__list">
+      <Col md={12} className="similar-movies__list">
         {movies.map((movie) => (
           <MovieCard key={movie._id} movie={movie} />
         ))}

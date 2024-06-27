@@ -6285,6 +6285,12 @@
   transform: scale(1.05);
 }
 
+@media (width <= 768px) {
+  .movie-card {
+    grid-template-rows: auto auto auto 1fr auto;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -12536,8 +12542,9 @@
 }
 
 .similar-movies__list {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, auto);
   gap: 1rem;
+  width: 100%;
   display: grid;
 }
 
@@ -12557,8 +12564,16 @@
     gap: 0;
   }
 
+  .similar-movies {
+    justify-content: center;
+    align-items: center;
+  }
+
   .similar-movies__list {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, auto);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 }
 
