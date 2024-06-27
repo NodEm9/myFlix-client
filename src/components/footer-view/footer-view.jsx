@@ -10,15 +10,16 @@ export const FooterView = () => {
          &copy; 2024 myFlix. All Rights Reserved.
       </Col>
       <Col >
+      
         <Nav className="p-2 d-md-flex d-sm-flex flex-column gap-3">
           <Nav.Link href="/" className="text-primary fs-2 text-decoration-none">
             myFlix</Nav.Link>
-          <Nav.Link href="/movies" className="text-white fs-6 text-decoration-none">
-            Movies</Nav.Link>
-          <Nav.Link href="/users" className="text-white fs-6 text-decoration-none">
-            Users</Nav.Link>
           <Nav.Link href="/" className="text-white fs-6 text-decoration-none">
-            About Us</Nav.Link>
+            Home</Nav.Link>
+          <Nav.Link href="/profile" className="text-white fs-6 text-decoration-none">
+            Users</Nav.Link>
+          <Nav.Link href={"https://movie-api-h54p.onrender.com/documentation.html"} target="_blank" className="text-white fs-6 text-decoration-none">
+           API Documentation</Nav.Link>
           
         </Nav>
       </Col>
