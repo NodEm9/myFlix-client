@@ -21,12 +21,12 @@ export const MovieView = () => {
   );
 
   return (
-    <>
-      <Row md={2} className="flex-md-row flex-column-reverse">
-        <Col md={8} className="movie-view">
+    <Row>
+      <Row md={2} className="flex-md-row flex-column-reverse pb-4">
+        <Col md={7} className="movie-view">
           <Col className="title text-md-lg">
             <h3 >Title:</h3>
-            <span className="fw-bolder pb-2 fs-3" key={movie._id}>
+            <span className="fw-bolder pb-2 fs-5" key={movie._id}>
               {movie.Title}
             </span>
           </Col>
@@ -96,12 +96,12 @@ export const MovieView = () => {
             </Link>
           </Col>
         </Col>
-        <Col md={4} className="">
+        <Col md={5} className="">
           <Card.Img
             src={movie.ImageUrl}
             key={movie.ImageUrl}
             alt="movie-poster"
-            className="w-100 h-75 rounded-3 shadow-sm movie-view-img"
+            className="w-100 rounded-3 shadow-sm movie-view-img"
           />
         </Col>
       </Row>
@@ -109,7 +109,7 @@ export const MovieView = () => {
       <Row>
         <SimilarMovies movies={similarMovies} />
       </Row>
-    </>
+    </Row>
   );
 };
 
