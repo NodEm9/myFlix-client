@@ -25,6 +25,18 @@ $brand-color: #1c960c;
 
 }
 
+.footer {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  margin-top: 7rem;
+
+  &__copyright {
+    margin-top: 13rem;
+    padding: 0;
+    font-size: 0.8rem;
+  }
+}
 
 @media all and (max-width: 768px) {
   .home {
@@ -47,5 +59,9 @@ $brand-color: #1c960c;
   
   .hero-text p {
     font-size: calc(16px + 1vmin);
+  }
+
+  .footer {
+    flex-direction: column-reverse;
   }
 }
