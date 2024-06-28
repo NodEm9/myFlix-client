@@ -6,12 +6,14 @@ import { ProfileView } from "../profile-view/profile-view";
 import Skeleton from "../loading/skeleton";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import ToastNotification from "../toast/toast";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/movies/movieSlice";
 import MoviesList from "../movie-list/movie-list";
+import { FaArrowUp } from "react-icons/fa6";
 
 
 export const MainView = () => {
@@ -66,6 +68,10 @@ export const MainView = () => {
       });
   }, [token]);
 
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   // This useEffect hook will run when the showSignup state changes
   useEffect(() => {
     setShowSignup(false);
@@ -77,7 +83,7 @@ export const MainView = () => {
       <NavigationBar
         onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }}
       />
-      <Row className="main justify-content-md-center h-100 pt-5 mt-5 mb-3 pb-5">
+      <Row className="main h-100 pt-5 mt-5 mb-3 pb-5">
         <Routes>
           <Route
             path="/signup"
@@ -132,8 +138,8 @@ export const MainView = () => {
                 ) : movies.length === 0 ? (
                   <Col >List is Empty</Col>
                 ) : (
-                  <Row className="pb-5">
-                    <Col md={12}>
+                  <Row className="pb-5 mx-auto">
+                    <Col md={12} >
                       <MovieView movies={movies} />
                     </Col>
                   </Row>
@@ -182,6 +188,16 @@ export const MainView = () => {
             }
           />
         </Routes>
+      </Row>
+      <Row className="p-5">
+        <Col>
+          <Button
+            variant="primary"
+            className="fs-4 rounded-circle float-end"
+            onClick={scrollTop}>
+            <FaArrowUp className="up-arrow" />
+          </Button>
+        </Col>
       </Row>
       {showToast && <ToastNotification message={user ? `Welcome back ${user.Username}` : "You are logged out"} />}
     </BrowserRouter>
