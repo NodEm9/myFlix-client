@@ -23,7 +23,7 @@
 
 .similar-movies {
   margin-top: 2rem;
-
+  
   h2 {
     margin-bottom: 1rem;
     margin-top: 2rem;
@@ -34,7 +34,8 @@
   grid-template-columns: repeat(4, auto);
   gap: 1rem;
   width: 100%;
-}
+  padding: 2rem;
+ }
 }
 
 @media all and (max-width: 768px){
