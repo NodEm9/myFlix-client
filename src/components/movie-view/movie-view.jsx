@@ -21,8 +21,8 @@ export const MovieView = () => {
   );
 
   return (
-    <Row>
-      <Row md={2} className="flex-md-row flex-column-reverse pb-4">
+    <>
+      <Row md={12} className="flex-md-row flex-column-reverse pb-4">
         <Col md={7} className="movie-view">
           <Col className="title text-md-lg">
             <h3 >Title:</h3>
@@ -109,7 +109,7 @@ export const MovieView = () => {
       <Row>
         <SimilarMovies movies={similarMovies} />
       </Row>
-    </Row>
+    </>
   );
 };
 
