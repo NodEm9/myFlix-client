@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Card, Button, Col, Row } from 'react-bootstrap';
+import { Card, Button, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './movie-card.scss';
 import { useState } from 'react';
@@ -63,7 +63,7 @@ export const MovieCard = ({ movie }) => {
       <Card.Img variant="top" src={movie.ImageUrl} />
       <Card.Body>
         <Col className='d-flex justify-content-between'>
-          <Card.Title className='fw-bold mb-3'>{movie.Title}</Card.Title>
+          <Card.Title className='title fw-bold mb-3'>{movie.Title}</Card.Title>
           {!isFavorited && token ? (
             <Card.Img
               className='favorite-icon'
