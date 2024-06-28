@@ -12,7 +12,6 @@ const MoviesList = () => {
     movie.Title.toLowerCase().includes(filter)
   );
 
-
   return (
     <>
       <Row className="p-3 mb-5">
