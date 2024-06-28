@@ -62,7 +62,7 @@ export const MainView = () => {
         setShowToast(true);
       }).catch((e) => {
         console.log(e);
-        
+
       });
   }, [token]);
 
@@ -74,7 +74,9 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar user={user} onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }} />
+      <NavigationBar
+        onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }}
+      />
       <Row className="main justify-content-md-center h-100 pt-5 mt-5 mb-3 pb-5">
         <Routes>
           <Route
@@ -111,7 +113,7 @@ export const MainView = () => {
                     <LoginView />
                     <button
                       onClick={() => setShowSignup(!showSignup)}
-                      className="switch-view  border-0 lead link-primary "
+                      className="switch-view bg-transparent border-0 lead link-primary "
                     >
                       {!showSignup ? "Don't have account? Sign Up here." :
                         <Navigate to="/signup" />}
@@ -177,7 +179,7 @@ export const MainView = () => {
                   </>
                 )}
               </>
-            } 
+            }
           />
         </Routes>
       </Row>
