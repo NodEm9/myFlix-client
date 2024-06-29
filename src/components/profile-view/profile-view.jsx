@@ -14,10 +14,10 @@ export const ProfileView = () => {
   const favoriteMovies = movies.filter((movie) =>  user.favoriteMovies.includes(movie._id));
 
   return (
-    <Row className="mt-4 h-100">
-      <h2 className='fw-bold'>Account Information</h2>
+    <Row className="h-100">
       <Row className='profile-view'>
-      <Col className='fs-5'>
+        <Col className='profile fs-5'>
+        <h2 className='fw-bold'>Account Information</h2>
         <div className="username">
           <span className="label fw-semibold">Username: </span>
           <span className="value">{user.Username}</span>

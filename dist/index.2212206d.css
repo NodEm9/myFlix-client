@@ -12582,15 +12582,22 @@
   }
 }
 
+.profile {
+  margin-top: 36rem;
+}
+
 .profile-view {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
   display: flex;
 }
 
 @media (width <= 768px) {
+  .profile {
+    margin-top: 5rem;
+  }
+
   .profile-view {
     flex-direction: column;
   }
