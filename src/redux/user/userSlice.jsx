@@ -6,6 +6,7 @@ const userSlice = createSlice({
   initialState: {
     user: JSON.parse(localStorage.getItem("user")),
     token: localStorage.getItem("token"),
+    favoriteMovies: [],
     deleteUser: null,
     loggedIn: Boolean(localStorage.getItem("token")),
   },
@@ -19,7 +20,9 @@ const userSlice = createSlice({
     setDeleteUser: (state, action) => {
       state.deleteUser = action.payload;
     },
-
+    setFavoriteMovies: (state, action) => {
+      state.favoriteMovies = action.payload;
+    },
     setLoggedIn: (state, action) => {
       state.loggedIn = action.payload;
     },
@@ -29,6 +32,7 @@ const userSlice = createSlice({
 export const {
   setUser,
   setToken,
+  setFavoriteMovies,
   setDeleteUser,
   setLoggedIn,
 } = userSlice.actions;

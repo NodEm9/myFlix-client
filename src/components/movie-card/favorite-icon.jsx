@@ -1,21 +1,16 @@
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import favoriteIcon from '../../img/favorite-icon.png';
 import favoriteIcon2 from '../../img/favorite-icon2.png';
+import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import './movie-card.scss';
-import { useSelector, useDispatch } from 'react-redux';
-import { setFavoriteMovies } from '../../redux/user/userSlice';
 
-export const MovieCard = ({ movie }) => {
+export const FavoriteIcon = ({ movie }) => {
   const user = useSelector((state) => state.user.user);
   const token = useSelector((state) => state.user.token);
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const dispatch = useDispatch();
+
 
   const addToFavorite = async () => {
     setIsFavorited(false);
@@ -25,18 +20,16 @@ export const MovieCard = ({ movie }) => {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
-      },
+      }
     }).then((response) => response.json())
       .then((data) => {
         if (data) {
           console.log('Favorite added', data);
-          dispatch(setFavoriteMovies(data.favoriteMovies));
           setIsFavorited(true);
         }
-        })
+      })
       .catch((error) => {
         console.log(error);
-       
       });
     setIsFavorited(false);
   }
@@ -53,9 +46,8 @@ export const MovieCard = ({ movie }) => {
       .then((data) => {
         if (data) {
           console.log('Favorite deleted', data);
-          dispatch(setFavoriteMovies([]));
+          setIsFavorited(false);
         }
-
       }).catch((error) => {
         console.log(error)
         setIsFavorited(false);
@@ -66,20 +58,14 @@ export const MovieCard = ({ movie }) => {
   useEffect(() => {
     if (user && movie) {
       setIsFavorited(user.favoriteMovies.includes(movie._id));
-    } else {
+    } else if (user || movie || !user.favoriteMovies.includes(movie._id)) {
       setIsFavorited(false);
     }
   }, [user, movie, user.favoriteMovies]);
 
-
-
   return (
-    <Card className='h-100 movie-card'>
-      <Card.Img variant="top" src={movie.ImageUrl} />
-      <Card.Body>
-        <Col className='d-flex justify-content-between'>
-          <Card.Title className='title fw-bold mb-3'>{movie.Title}</Card.Title>
-          {isFavorited ? (
+    <div>
+      {isFavorited ? (
         <Card.Img
           src={favoriteIcon}
           onClick={removeFavoriteMovie}
@@ -90,35 +76,10 @@ export const MovieCard = ({ movie }) => {
         <Card.Img
           className='favorite-icon'
           src={favoriteIcon2}
+          disabled={isFavorited}
           onClick={addToFavorite}
         />
       )}
-        </Col>
-        <Card.Text>{movie.Description}</Card.Text>
-        <Col className='d-flex justify-content-between align-items-center mt-3'>
-          <Link to={`/movie/${encodeURIComponent(movie._id)}`}>
-            <Button variant="link">Open</Button>
-          </Link>
-          <Card.Text>{movie.Genre.map(g => (
-            <span key={g.name}>{g.name}</span>
-          ))}
-          </Card.Text>
-        </Col>
-      </Card.Body>
-    </Card>
+    </div>
   );
-};
-
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.arrayOf(PropTypes.object),
-    Director: PropTypes.arrayOf(PropTypes.object),
-    Actor: PropTypes.arrayOf(PropTypes.object),
-    ReleaseDate: PropTypes.string.isRequired,
-    ImageUrl: PropTypes.string,
-    Rating: PropTypes.number,
-    Featured: PropTypes.bool
-  }).isRequired,
 };

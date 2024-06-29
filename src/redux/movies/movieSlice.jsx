@@ -5,6 +5,7 @@ const movieSlice = createSlice({
   initialState: {
     movies: [],
     filter: "",
+    
   },
   reducers: {
     setMovies: (state, action) => {

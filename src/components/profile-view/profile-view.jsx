@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { UpdateUserData } from './updateUser';
@@ -11,27 +10,7 @@ import { useSelector } from 'react-redux';
 export const ProfileView = () => {
   const movies = useSelector((state) => state.movies.movies);
   const user = useSelector((state) => state.user.user);
-  const token = useSelector((state) => state.user.token);
-  const favoriteMovies = movies.filter((movie) => user.favoriteMovies.includes(movie._id));
-
-  useEffect(() => {
-    function getUser() {
-      if (!token) return;
-      if (!user) return;
-      console.log(user);
-     
-      return {
-        Username: user.Username,
-        Password: user.Password,
-        Email: user.Email,
-        Birthday: user.Birthday,
-      };
-      }
-    getUser();
-
-  }, [token, user]);
-
-
+  const favoriteMovies = movies.filter((movie) =>  user.favoriteMovies.includes(movie._id));
 
   return (
     <Row className="profile-view d-flex mt-4 h-100">
@@ -59,14 +38,14 @@ export const ProfileView = () => {
       </Col>
       <Row className='d-flex justify-content-center'>
         <Col className='my-4'>
-          <DeleteUser  />
+          <DeleteUser />
         </Col>
       </Row>
       <hr className='my-4' />
       <Row className='d-flex justify-content-center'>
         <h2 className='fw-bold'>Favorite Movies</h2>
         <Col className='d-flex justify-content-center'>
-          <UserFavoriteMovies favoriteMovies={favoriteMovies} /> 
+          <UserFavoriteMovies favoriteMovies={favoriteMovies} />
         </Col>
       </Row>
     </Row>
