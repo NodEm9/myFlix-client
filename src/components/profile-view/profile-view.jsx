@@ -13,8 +13,9 @@ export const ProfileView = () => {
   const favoriteMovies = movies.filter((movie) =>  user.favoriteMovies.includes(movie._id));
 
   return (
-    <Row className="profile-view d-flex mt-4 h-100">
+    <Row className="d-flex mt-4 h-100">
       <h2 className='fw-bold'>Account Information</h2>
+      <Row className=''>
       <Col className='fs-5'>
         <div className="username">
           <span className="label fw-semibold">Username: </span>
@@ -35,7 +36,8 @@ export const ProfileView = () => {
       </Col>
       <Col className='my-4'>
         <UpdateUserData user={user} />
-      </Col>
+        </Col>
+      </Row>
       <Row className='d-flex justify-content-center'>
         <Col className='my-4'>
           <DeleteUser />
