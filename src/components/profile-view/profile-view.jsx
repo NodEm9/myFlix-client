@@ -4,6 +4,7 @@ import { UpdateUserData } from './updateUser';
 import { DeleteUser } from './delete-user';
 import { UserFavoriteMovies } from './favoriteMovie';
 import { useSelector } from 'react-redux';
+import './profile-view.scss';
 
 
 
@@ -13,9 +14,9 @@ export const ProfileView = () => {
   const favoriteMovies = movies.filter((movie) =>  user.favoriteMovies.includes(movie._id));
 
   return (
-    <Row className="d-flex mt-4 h-100">
+    <Row className="mt-4 h-100">
       <h2 className='fw-bold'>Account Information</h2>
-      <Row className=''>
+      <Row className='profile-view'>
       <Col className='fs-5'>
         <div className="username">
           <span className="label fw-semibold">Username: </span>

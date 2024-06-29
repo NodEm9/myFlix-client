@@ -12582,6 +12582,20 @@
   }
 }
 
+.profile-view {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  display: flex;
+}
+
+@media (width <= 768px) {
+  .profile-view {
+    flex-direction: column;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
