@@ -38301,6 +38301,10 @@ textarea.form-control-lg {
     grid-template-rows: repeat(2, 1fr);
   }
 
+  .move-list {
+    padding: 2rem;
+  }
+
   .hero-text {
     text-align: center;
     margin-bottom: 2rem;
