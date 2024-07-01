@@ -1,41 +1,34 @@
 import { useEffect } from 'react';
+import { MovieCard } from '../movie-card/movie-card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { MovieCard } from '../movie-card/movie-card';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setFavoriteMovies } from '../../redux/user/userSlice';
 
 
 
 export const UserFavoriteMovies = ({ favoriteMovies }) => {
   const user = useSelector((state) => state.user.user);
-  const token = useSelector((state) => state.user.token);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/favorites`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          console.log('Successfully fetch', data);
-          dispatch(setFavoriteMovies(data.favoriteMovies));
-        }
-      }).catch((error) => {
-        console.log(error);
-      });
+    const updateOptimisticUI = () => {
+      setFavoriteMovies(user.favoriteMovies);
+    };
 
-  }, [token, user.favoriteMovies]);
+    return () => {
+      updateOptimisticUI();
+    };
+  }, [user.favoriteMovies, favoriteMovies]);
 
 
   return (
     <Row className="favorite-movies d-flex mt-4 h-100">
       {favoriteMovies.map((movie) => (
         <Col md={3} key={movie._id} className='p-3'>
-          <MovieCard movie={movie} />
+          <MovieCard
+            movie={movie}
+          />
         </Col>
       ))}
     </Row>
@@ -43,5 +36,5 @@ export const UserFavoriteMovies = ({ favoriteMovies }) => {
 }
 
 UserFavoriteMovies.propTypes = {
-  favoriteMovies: PropTypes.array.isRequired
+  favoriteMovies: PropTypes.array.isRequired,
 };

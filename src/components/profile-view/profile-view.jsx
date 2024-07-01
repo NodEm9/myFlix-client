@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux';
 import './profile-view.scss';
 
 
-
 export const ProfileView = () => {
   const movies = useSelector((state) => state.movies.movies);
   const user = useSelector((state) => state.user.user);
-  const favoriteMovies = movies.filter((movie) =>  user.favoriteMovies.includes(movie._id));
+  const favoriteMovies = movies.filter((movie) =>  user.favoriteMovies.includes(movie._id)); 
+    
 
   return (
     <Row className="h-100">
@@ -48,7 +48,7 @@ export const ProfileView = () => {
       <Row className='d-flex justify-content-center'>
         <h2 className='fw-bold'>Favorite Movies</h2>
         <Col className='d-flex justify-content-center'>
-          <UserFavoriteMovies favoriteMovies={favoriteMovies} />
+            <UserFavoriteMovies favoriteMovies={favoriteMovies} />
         </Col>
       </Row>
     </Row>

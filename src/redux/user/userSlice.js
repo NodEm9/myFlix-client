@@ -21,7 +21,7 @@ const userSlice = createSlice({
       state.deleteUser = action.payload;
     },
     setFavoriteMovies: (state, action) => {
-      state.favoriteMovies = action.payload;
+      state.favoriteMovies = state.favoriteMovies.push(action.payload);
     },
     setLoggedIn: (state, action) => {
       state.loggedIn = action.payload;
