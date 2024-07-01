@@ -179,7 +179,7 @@ export const MainView = () => {
                   </>
                 ) : (
                   <>
-                    <Col className="pb-5">
+                    <Col className="pb-5 move-list">
                       <MoviesList />
                     </Col>
                   </>
