@@ -23,7 +23,9 @@ const MoviesList = () => {
         <Row>
           {filterMovies.map((movie) => (
             <Col key={movie._id} xs={12} sm={6} md={3} lg={3} className="p-3">
-              <MovieCard movie={movie} />
+              <MovieCard
+                movie={movie}
+              />
             </Col>
           ))}
         </Row>
