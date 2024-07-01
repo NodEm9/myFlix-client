@@ -7,15 +7,15 @@ import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './movie-card.scss';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, } from 'react-redux';
 import { setFavoriteMovies } from '../../redux/user/userSlice';
+
 
 export const MovieCard = ({ movie }) => {
   const user = useSelector((state) => state.user.user);
   const token = useSelector((state) => state.user.token);
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const dispatch = useDispatch();
 
   const addToFavorite = async () => {
     setIsFavorited(false);
@@ -26,24 +26,25 @@ export const MovieCard = ({ movie }) => {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
+      body: JSON.stringify({favoriteMovies: movie._id})
     }).then((response) => response.json())
       .then((data) => {
         if (data) {
           console.log('Favorite added', data);
-          dispatch(setFavoriteMovies(data.favoriteMovies));
-          setIsFavorited(true);
+          if (user) {
+            setFavoriteMovies(data);
+            setIsFavorited(true);
+          }
         }
-        })
+      })
       .catch((error) => {
         console.log(error);
-       
       });
-    setIsFavorited(false);
+    setIsFavorited(true);
   }
 
   const removeFavoriteMovie = async () => {
     setIsFavorited(true);
-
     fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${movie._id}`, {
       method: 'DELETE',
       headers: {
@@ -53,12 +54,12 @@ export const MovieCard = ({ movie }) => {
       .then((data) => {
         if (data) {
           console.log('Favorite deleted', data);
-          dispatch(setFavoriteMovies([]));
+          setFavoriteMovies([]);
+          setIsFavorited(false);
         }
 
       }).catch((error) => {
-        console.log(error)
-        setIsFavorited(false);
+        console.log(error);
       });
     setIsFavorited(false);
   };
@@ -80,19 +81,19 @@ export const MovieCard = ({ movie }) => {
         <Col className='d-flex justify-content-between'>
           <Card.Title className='title fw-bold mb-3'>{movie.Title}</Card.Title>
           {isFavorited ? (
-        <Card.Img
-          src={favoriteIcon}
-          onClick={removeFavoriteMovie}
-          disabled={isFavorited}
-          className='favorite-icon'
-        />
-      ) : (
-        <Card.Img
-          className='favorite-icon'
-          src={favoriteIcon2}
-          onClick={addToFavorite}
-        />
-      )}
+            <Card.Img
+              src={favoriteIcon}
+              onClick={removeFavoriteMovie}
+              disabled={isFavorited}
+              className='favorite-icon'
+            />
+          ) : (
+            <Card.Img
+              className='favorite-icon'
+              src={favoriteIcon2}
+              onClick={addToFavorite}
+            />
+          )}
         </Col>
         <Card.Text>{movie.Description}</Card.Text>
         <Col className='d-flex justify-content-between align-items-center mt-3'>
