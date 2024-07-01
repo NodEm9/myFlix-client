@@ -26,15 +26,13 @@ export const MovieCard = ({ movie }) => {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({favoriteMovies: movie._id})
+      body: JSON.stringify({ favoriteMovies: user.favoriteMovies })
     }).then((response) => response.json())
       .then((data) => {
         if (data) {
           console.log('Favorite added', data);
-          if (user) {
-            setFavoriteMovies(data);
-            setIsFavorited(true);
-          }
+          setFavoriteMovies(data);
+          setIsFavorited(true);
         }
       })
       .catch((error) => {

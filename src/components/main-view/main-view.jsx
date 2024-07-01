@@ -188,7 +188,8 @@ export const MainView = () => {
             }
           />
         </Routes>
-        <Row className="p-5">
+      </Row>
+      <Row className="p-5">
         <Col>
           <Button
             variant="primary"
@@ -197,7 +198,6 @@ export const MainView = () => {
             <FaArrowUp className="up-arrow" />
           </Button>
         </Col>
-      </Row>
       </Row>
       {showToast && <ToastNotification message={user ? `Welcome back ${user.Username}` : "You are logged out"} />}
     </BrowserRouter>
