@@ -50,6 +50,10 @@ $brand-color: #1c960c;
     grid-template-rows: repeat(2, 1fr);
   }
 
+  .move-list {
+    padding: 2rem;
+  }
+
   .hero-text {
     font-size: calc(26px + 2vmin);
     text-align: center;
