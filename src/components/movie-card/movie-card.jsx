@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import favoriteIcon from '../../img/favorite-icon.png';
-import favoriteIcon2 from '../../img/favorite-icon2.png';
+import unhearted from '../../img/unhearted.png';
+import hearted from '../../img/hearted.png';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -119,7 +119,7 @@ export const MovieCard = ({ movie, isFavorite }) => {
             <Card.Title className='movie-card__title fw-bold mb-3'>{movie.Title}</Card.Title>
             {isFavorite && isFavorited ? (
               <Card.Img
-                src={favoriteIcon}
+                src={unhearted}
                 onClick={handleRemoveMovie}
                 disabled={isFavorite}
                 className='favorite-icon'
@@ -127,7 +127,7 @@ export const MovieCard = ({ movie, isFavorite }) => {
               />
             ) : (
               <Card.Img
-                src={favoriteIcon2}
+                src={hearted}
                 onClick={handleAddMovie}
                 alt='favorite-icon2'
                 className='favorite-icon'
