@@ -112,12 +112,11 @@ export const MovieCard = ({ movie, isFavorite }) => {
 
 
   return (
-    <Link to={`/movie/${encodeURIComponent(movie._id)}`}>
-      <Card className='h-100 movie-card'>
-        <Card.Img variant="top" src={movie.ImageUrl} alt={`Image of ${movie.Title}`} />
+    <Card className='h-100 movie-card'>
+        <Card.Img variant="top" src={movie.ImageUrl} alt={`Image of ${movie.Title}`} className='movie-card__img' />
         <Card.Body>
           <Col className='d-flex justify-content-between'>
-            <Card.Title className='title fw-bold mb-3'>{movie.Title}</Card.Title>
+            <Card.Title className='movie-card__title fw-bold mb-3'>{movie.Title}</Card.Title>
             {isFavorite && isFavorited ? (
               <Card.Img
                 src={favoriteIcon}
@@ -128,14 +127,14 @@ export const MovieCard = ({ movie, isFavorite }) => {
               />
             ) : (
               <Card.Img
-                className='favorite-icon'
                 src={favoriteIcon2}
                 onClick={handleAddMovie}
                 alt='favorite-icon2'
+                className='favorite-icon'
               />
             )}
           </Col>
-          <Card.Text>{movie.Description}</Card.Text>
+          <Card.Text className='movie-card__description'>{movie.Description}</Card.Text>
           <Col className='d-flex justify-content-between align-items-center mt-3'>
             <Link to={`/movie/${encodeURIComponent(movie._id)}`}>
               <Button variant="link">Open</Button>
@@ -147,7 +146,6 @@ export const MovieCard = ({ movie, isFavorite }) => {
           </Col>
         </Card.Body>
       </Card>
-    </Link>
   );
 };
 
