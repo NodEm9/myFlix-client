@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { MovieView } from "../movie-view/movie-view";
 import LoginView from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
@@ -7,7 +8,6 @@ import Skeleton from "../loading/skeleton";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import ToastNotification from "../toast/toast";
 import { useSelector, useDispatch } from "react-redux";
@@ -155,7 +155,7 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={12} >
-                    <ProfileView />
+                      <ProfileView movies={movies} />
                   </Col>
                 )}
               </>
