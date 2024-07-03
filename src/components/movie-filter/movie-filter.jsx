@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import "./movie-filter.scss";
 
 
+
 const MovieFilter = () => { 
   const filter = useSelector((state) => state.movies.filter);
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const MovieFilter = () => {
           onChange={(e) => dispatch(setFilter(e.target.value))}
           placeholder="Search movies..."
           className="p-3 w-75 min-vw-auto mx-auto"
-          aria-placeholder="A Search Movies input field. Type to search for movies."
+          aria-placeholder="Movie title"
         />
       </Form.Group>
     </Form>
