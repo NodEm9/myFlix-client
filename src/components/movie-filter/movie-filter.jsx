@@ -18,9 +18,9 @@ const MovieFilter = () => {
           value={filter}
           role="search"
           onChange={(e) => dispatch(setFilter(e.target.value))}
-          placeholder="Search movies..."
+          placeholder="filter movies..."
           className="p-3 w-75 min-vw-auto mx-auto"
-          aria-placeholder="Search movies..."
+          aria-placeholder="filter movies..."
         />
       </Form.Group>
     </Form>
