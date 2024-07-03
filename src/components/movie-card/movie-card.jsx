@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import unhearted from '../../img/unhearted.png';
 import hearted from '../../img/hearted.png';
+import unhearted from '../../img/unhearted.png';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -113,39 +113,39 @@ export const MovieCard = ({ movie, isFavorite }) => {
 
   return (
     <Card className='h-100 movie-card'>
-        <Card.Img variant="top" src={movie.ImageUrl} alt={`Image of ${movie.Title}`} className='movie-card__img' />
-        <Card.Body>
-          <Col className='d-flex justify-content-between'>
-            <Card.Title className='movie-card__title fw-bold mb-3'>{movie.Title}</Card.Title>
-            {isFavorite && isFavorited ? (
-              <Card.Img
-                src={unhearted}
-                onClick={handleRemoveMovie}
-                disabled={isFavorite}
-                className='favorite-icon'
-                alt='favorite-icon'
-              />
-            ) : (
-              <Card.Img
-                src={hearted}
-                onClick={handleAddMovie}
-                alt='favorite-icon2'
-                className='favorite-icon'
-              />
-            )}
-          </Col>
-          <Card.Text className='movie-card__description'>{movie.Description}</Card.Text>
-          <Col className='d-flex justify-content-between align-items-center mt-3'>
-            <Link to={`/movie/${encodeURIComponent(movie._id)}`}>
-              <Button variant="link">Open</Button>
-            </Link>
-            <Card.Text>{movie.Genre.map(g => (
-              <span key={g.name}>{g.name}</span>
-            ))}
-            </Card.Text>
-          </Col>
-        </Card.Body>
-      </Card>
+      <Card.Img variant="top" src={movie.ImageUrl} alt={`Image of ${movie.Title}`} className='movie-card__img' />
+      <Card.Body>
+        <Col className='d-flex justify-content-between'>
+          <Card.Title className='movie-card__title fw-bold mb-3'>{movie.Title}</Card.Title>
+          {isFavorite && isFavorited ? (
+            <Card.Img
+              src={hearted}
+              onClick={handleRemoveMovie}
+              disabled={isFavorite}
+              alt='unhearted icon'
+              className='favorite-icon'
+            />
+          ) : (
+            <Card.Img
+              src={unhearted}
+              onClick={handleAddMovie}
+              alt='hearted icon'
+              className='favorite-icon'
+            />
+          )}
+        </Col>
+        <Card.Text className='movie-card__description'>{movie.Description}</Card.Text>
+        <Col className='d-flex justify-content-between align-items-center mt-3'>
+          <Link to={`/movie/${encodeURIComponent(movie._id)}`}>
+            <Button variant="link">Open</Button>
+          </Link>
+          <Card.Text>{movie.Genre.map(g => (
+            <span key={g.name}>{g.name}</span>
+          ))}
+          </Card.Text>
+        </Col>
+      </Card.Body>
+    </Card>
   );
 };
 
