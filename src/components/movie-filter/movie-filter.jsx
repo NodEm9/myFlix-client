@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilter } from "../../redux/movies/movieSlice";
 import Form from "react-bootstrap/Form";
