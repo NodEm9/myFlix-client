@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 import favoriteIcon from '../../img/favorite-icon.png';
 import favoriteIcon2 from '../../img/favorite-icon2.png';
 import Button from 'react-bootstrap/Button';
@@ -7,71 +7,108 @@ import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './movie-card.scss';
-import { useSelector, } from 'react-redux';
-import { setFavoriteMovies } from '../../redux/user/userSlice';
+import { useSelector } from 'react-redux';
 
 
-export const MovieCard = ({ movie }) => {
+export const MovieCard = ({ movie, isFavorite }) => {
   const user = useSelector((state) => state.user.user);
   const token = useSelector((state) => state.user.token);
   const [isFavorited, setIsFavorited] = useState(false);
 
+  const [addMovieTitle, setAddMovieTitle] = useState('');
+  const [removeMovieTitle, setRemoveMovieTitle] = useState('');
 
-  const addToFavorite = async () => {
-    setIsFavorited(false);
+  useEffect(() => {
 
-    fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${movie._id}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({favoriteMovies: movie._id})
-    }).then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          console.log('Favorite added', data);
-          if (user) {
-            setFavoriteMovies(data);
-            setIsFavorited(true);
-          }
+    // Add movie to favorite list
+    const addToFavorite = async () => {
+      setIsFavorited(false);
+      isFavorite = false;
+
+      fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${movie._id}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setIsFavorited(true);
+      }).then((response) => response.json())
+        .then((data) => {
+          if (data) {
+            data = { ...user, favoriteMovies: [...user.favoriteMovies, movie._id] };
+            console.log('Favorite added', data);
+            localStorage.setItem('user', JSON.stringify(data));
+            setIsFavorited(true);
+            isFavorite = true;
+            window.location.reload();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      setIsFavorited(true);
+      isFavorite = true;
+    };
+
+    // Remove movie from favorite list
+    const removeFavoriteMovie = async () => {
+      setIsFavorited(true);
+      isFavorite = true;
+
+      fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${encodeURIComponent(movie._id)}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((response) => response.json())
+        .then((data) => {
+          if (data) {
+            console.log('Favorite deleted', data);
+            data = { ...user, favoriteMovies: user.favoriteMovies.filter((m) => m !== movie._id) };
+            localStorage.setItem('user', JSON.stringify(data));
+            setIsFavorited(false);
+            isFavorite = false;
+            window.location.reload();
+          }
+
+        }).catch((error) => {
+          console.log(error);
+        });
+      setIsFavorited(false);
+      isFavorite = false;
+    };
+
+
+    if (addMovieTitle) {
+      addToFavorite();
+    }
+
+    if (removeMovieTitle) {
+      removeFavoriteMovie();
+    }
+
+  }, [addMovieTitle, removeMovieTitle, movie, user, token, isFavorite, isFavorited]);
+
+  // Add movie to favorite list by clicking on the favorite icon2
+  const handleAddMovie = (e) => {
+    e.preventDefault();
+    setAddMovieTitle(movie.Title);
   }
 
-  const removeFavoriteMovie = async () => {
-    setIsFavorited(true);
-    fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${movie._id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          console.log('Favorite deleted', data);
-          setFavoriteMovies([]);
-          setIsFavorited(false);
-        }
-
-      }).catch((error) => {
-        console.log(error);
-      });
-    setIsFavorited(false);
-  };
+  // Remove movie from favorite list by clicking on the favorite icon
+  const handleRemoveMovie = (e) => {
+    e.preventDefault();
+    setRemoveMovieTitle(movie.Title);
+  }
 
   useEffect(() => {
     if (user && movie) {
       setIsFavorited(user.favoriteMovies.includes(movie._id));
+      isFavorite = true;
     } else {
       setIsFavorited(false);
+      isFavorite = false;
     }
-  }, [user, movie, user.favoriteMovies]);
-
+  }, [user, movie, user]);
 
 
   return (
@@ -80,18 +117,18 @@ export const MovieCard = ({ movie }) => {
       <Card.Body>
         <Col className='d-flex justify-content-between'>
           <Card.Title className='title fw-bold mb-3'>{movie.Title}</Card.Title>
-          {isFavorited ? (
+          {isFavorite && isFavorited ? (
             <Card.Img
               src={favoriteIcon}
-              onClick={removeFavoriteMovie}
-              disabled={isFavorited}
+              onClick={handleRemoveMovie}
+              disabled={isFavorite}
               className='favorite-icon'
             />
           ) : (
             <Card.Img
               className='favorite-icon'
               src={favoriteIcon2}
-              onClick={addToFavorite}
+              onClick={handleAddMovie}
             />
           )}
         </Col>
