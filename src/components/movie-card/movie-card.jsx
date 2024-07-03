@@ -112,6 +112,7 @@ export const MovieCard = ({ movie, isFavorite }) => {
 
 
   return (
+    <Link to={`/movie/${encodeURIComponent(movie._id)}`}>
     <Card className='h-100 movie-card'>
       <Card.Img variant="top" src={movie.ImageUrl} />
       <Card.Body>
@@ -143,7 +144,8 @@ export const MovieCard = ({ movie, isFavorite }) => {
           </Card.Text>
         </Col>
       </Card.Body>
-    </Card>
+      </Card>
+    </Link>
   );
 };
 
