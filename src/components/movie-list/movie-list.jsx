@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { MovieCard } from "../movie-card/movie-card";
 import MovieFilter from "../movie-filter/movie-filter";
@@ -5,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 const MoviesList = () => {
+  const user = useSelector((state) => state.user.user);
   const movies = useSelector((state) => state.movies.movies);
   const filter = useSelector((state) => state.movies.filter).trim().toLowerCase();
 
@@ -25,6 +27,7 @@ const MoviesList = () => {
             <Col key={movie._id} xs={12} sm={6} md={3} lg={3} className="p-3">
               <MovieCard
                 movie={movie}
+                isFavorite={user.favoriteMovies}
               />
             </Col>
           ))}
