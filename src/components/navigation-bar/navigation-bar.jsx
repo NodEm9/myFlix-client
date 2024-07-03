@@ -1,3 +1,4 @@
+import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
@@ -31,7 +32,7 @@ export const NavigationBar = ({ onLoggedOut }) => {
               </Navbar.Text>
             ) : (
               <Navbar.Text className="m-3">
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link> 
               </Navbar.Text>
             )}
             <Navbar.Text className="m-3">
