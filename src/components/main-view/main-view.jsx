@@ -194,7 +194,10 @@ export const MainView = () => {
           <Button
             variant="primary"
             className="fs-4 rounded-circle float-end"
-            onClick={scrollTop}>
+            name="scrollTop button"
+            aria-label="Scroll to top"
+            onClick={scrollTop}
+          >
             <FaArrowUp className="up-arrow" />
           </Button>
         </Col>
