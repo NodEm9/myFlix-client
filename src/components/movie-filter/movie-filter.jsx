@@ -17,7 +17,7 @@ const MovieFilter = () => {
         <Form.Control
           type="text"
           value={filter}
-          role="formFilter"
+          role="input"
           onChange={(e) => dispatch(setFilter(e.target.value))}
           placeholder="Search movies..."
           className="p-3 w-75 min-vw-auto mx-auto"
