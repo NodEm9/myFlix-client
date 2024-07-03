@@ -1,4 +1,5 @@
-import { Col, Row } from "react-bootstrap"
+import React from "react"
+import Row from "react-bootstrap/Row"
 import Card from "react-bootstrap/Card"
 import { Col } from "react-bootstrap"
 import "./loading-skeleton.scss"
