@@ -16,11 +16,11 @@ const MovieFilter = () => {
         <Form.Control
           type="text"
           value={filter}
-          role="search"
+          role="formFilter"
           onChange={(e) => dispatch(setFilter(e.target.value))}
-          placeholder="filter movies..."
+          placeholder="Search movies..."
           className="p-3 w-75 min-vw-auto mx-auto"
-          aria-placeholder="filter movies..."
+          aria-placeholder="A Search Movies input field. Type to search for movies."
         />
       </Form.Group>
     </Form>
