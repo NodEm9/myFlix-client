@@ -12,11 +12,6 @@ $active-color: #1efe00;
 $nav-background: #f2f2f2;
 $brand-color: #1c960c;
 
-.card {
-  text-decoration: none;
-  height: 100%;
-  width: 100%;
-}
 
 .movie-card {  
   display: grid;
@@ -67,5 +62,6 @@ $brand-color: #1c960c;
 @media all and (max-width: 768px){
   .movie-card {
     grid-template-rows: auto auto auto 1fr auto;
+    grid-template-columns: auto auto;
   }
 }
