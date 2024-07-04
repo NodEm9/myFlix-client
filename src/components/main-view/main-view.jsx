@@ -179,7 +179,7 @@ export const MainView = () => {
                   </>
                 ) : (
                   <>
-                    <Col className="pb-5 move-list">
+                    <Col md={12}  sm={3} lg={12} className="pb-5 movies"> 
                       <MoviesList />
                     </Col>
                   </>
@@ -192,7 +192,7 @@ export const MainView = () => {
       <Row className="p-5">
         <Col>
           <Button
-            variant="primary"
+            variant="dark"
             className="fs-4 rounded-circle float-end"
             name="scrollTop button"
             aria-label="Scroll to top"
