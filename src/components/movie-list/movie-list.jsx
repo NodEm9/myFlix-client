@@ -5,6 +5,7 @@ import MovieFilter from "../movie-filter/movie-filter";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+
 const MoviesList = () => {
   const user = useSelector((state) => state.user.user);
   const movies = useSelector((state) => state.movies.movies);
@@ -22,9 +23,9 @@ const MoviesList = () => {
       {movies.length === 0 ? (
         <div className="main-view">The list is empty!</div>
       ) : (
-        <Row>
+        <Row md={3} sm={12} lg={12}>
           {filterMovies.map((movie) => (
-            <Col key={movie._id} xs={12} sm={6} md={3} lg={3} className="p-3">
+            <Col key={movie._id} sm={6} md={3} lg={3} className="p-3 ">
               <MovieCard
                 movie={movie}
                 isFavorite={user.favoriteMovies}
