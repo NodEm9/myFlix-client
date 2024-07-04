@@ -6,9 +6,8 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './movie-card.scss';
 import { useSelector } from 'react-redux';
-
+import './movie-card.scss';
 
 export const MovieCard = ({ movie, isFavorite }) => {
   const user = useSelector((state) => state.user.user);
@@ -145,7 +144,7 @@ export const MovieCard = ({ movie, isFavorite }) => {
           </Card.Text>
         </Col>
       </Card.Body>
-    </Card>
+      </Card>
   );
 };
 
