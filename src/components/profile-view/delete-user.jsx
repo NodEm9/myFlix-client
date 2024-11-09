@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './profile-view.scss';
 import Button from "react-bootstrap/Button";
 import ToastNotification from "../toast/toast";
 import { setDeleteUser } from "../../redux/user/userSlice";
@@ -40,7 +41,7 @@ export const DeleteUser = () => {
   };
 
   return (
-    <div>
+    <div className="delete-user">
       <Button
         variant="danger"
         onClick={handleDelete}
