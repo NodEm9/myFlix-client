@@ -17,22 +17,22 @@ const MoviesList = () => {
 
   return (
     <>
-      <Row className="p-3 mb-5">
+      <Row className="p-3">
         <MovieFilter />
       </Row>
       {movies.length === 0 ? (
         <div className="main-view">The list is empty!</div>
       ) : (
-        <Row md={3} sm={12} lg={12}>
+        <div className="movie-list">
           {filterMovies.map((movie) => (
-            <Col key={movie._id} sm={6} md={3} lg={3} className="p-3 ">
+            <Col md={12} key={movie._id}>
               <MovieCard
                 movie={movie}
                 isFavorite={user.favoriteMovies}
               />
             </Col>
           ))}
-        </Row>
+        </div>
       )}
     </>
   );
