@@ -1,5 +1,23 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
+$brand-color: #1c960c;
+
+.filter {
+  position: relative;
+  margin: auto;
+  box-shadow: none;
+  background: transparent;
+}
+
 .formLabel {
   display: none;
+}
+
+.filter-group {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
 }
