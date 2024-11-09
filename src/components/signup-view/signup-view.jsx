@@ -59,46 +59,54 @@ export const SignupView = () => {
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form noValidate validated={validated} onSubmit={handleSubmit} className="h-100 pb-5">
+      <h1 className="fs-4 p-2 fw-semi-bold">Sign Up a myFlix account</h1>
       <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
+        <Form.Label className="label">Username:</Form.Label>
         <Form.Control
           type="text"
           value={username}
           required
+          placeholder="Enter username"
           minLength={5}
           onChange={(e) => setUsername(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
       <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
+        <Form.Label className="label">Password:</Form.Label>
         <Form.Control
           type="password"
           value={password}
           required
+          placeholder="Enter password"
           onChange={(e) => setPassword(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
       <Form.Group controlId="formEmail">
-        <Form.Label>Email:</Form.Label>
+        <Form.Label className="label">Email:</Form.Label>
         <Form.Control
           type="email"
           value={email}
           required
+          placeholder="Enter email"
           onChange={(e) => setEmail(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
       <Form.Group controlId="formBirthday">
-        <Form.Label>Birthday:</Form.Label>
+        <Form.Label className="label">Birthday:</Form.Label>
         <Form.Control
           type="date"
           value={birthday}
           required
           onChange={(e) => setBirthday(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
-      <Button variant="primary" type="submit" className="float-end mt-2">
-        Submit
+      <Button type="submit" className="btn float-end mt-2">
+        Sign Up
       </Button>
       {errMsg ? (
        show && <ToastNotification
