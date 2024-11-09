@@ -12566,6 +12566,15 @@
   display: grid;
 }
 
+.favorite-icon {
+  color: #fff;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
 @media (width <= 768px) {
   .movie-view-img {
     margin-top: -1.5rem;
