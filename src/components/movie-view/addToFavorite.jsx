@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useSelector } from 'react-redux';
-import unhearted from '../../img/unhearted.png';
+import unhearted from '../../img/love-icon.svg';
 import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
 import { useContext } from "react";
