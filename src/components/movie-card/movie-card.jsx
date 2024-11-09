@@ -1,150 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import hearted from '../../img/hearted.png';
-import unhearted from '../../img/unhearted.png';
-import Button from 'react-bootstrap/Button';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
 import './movie-card.scss';
 
-export const MovieCard = ({ movie, isFavorite }) => {
-  const user = useSelector((state) => state.user.user);
-  const token = useSelector((state) => state.user.token);
-  const [isFavorited, setIsFavorited] = useState(false);
-
-  const [addMovieTitle, setAddMovieTitle] = useState('');
-  const [removeMovieTitle, setRemoveMovieTitle] = useState('');
-
-  useEffect(() => {
-
-    // Add movie to favorite list
-    const addToFavorite = async () => {
-      setIsFavorited(false);
-      isFavorite = false;
-
-      fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${movie._id}`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      }).then((response) => response.json())
-        .then((data) => {
-          if (data) {
-            data = { ...user, favoriteMovies: [...user.favoriteMovies, movie._id] };
-            console.log('Favorite added', data);
-            localStorage.setItem('user', JSON.stringify(data));
-            setIsFavorited(true);
-            isFavorite = true;
-            window.location.reload();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      setIsFavorited(true);
-      isFavorite = true;
-    };
-
-    // Remove movie from favorite list
-    const removeFavoriteMovie = async () => {
-      setIsFavorited(true);
-      isFavorite = true;
-
-      fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}/movies/${encodeURIComponent(movie._id)}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then((response) => response.json())
-        .then((data) => {
-          if (data) {
-            console.log('Favorite deleted', data);
-            data = { ...user, favoriteMovies: user.favoriteMovies.filter((m) => m !== movie._id) };
-            localStorage.setItem('user', JSON.stringify(data));
-            setIsFavorited(false);
-            isFavorite = false;
-            window.location.reload();
-          }
-
-        }).catch((error) => {
-          console.log(error);
-        });
-      setIsFavorited(false);
-      isFavorite = false;
-    };
-
-
-    if (addMovieTitle) {
-      addToFavorite();
-    }
-
-    if (removeMovieTitle) {
-      removeFavoriteMovie();
-    }
-
-  }, [addMovieTitle, removeMovieTitle, movie, user, token, isFavorite, isFavorited]);
-
-  // Add movie to favorite list by clicking on the favorite icon2
-  const handleAddMovie = (e) => {
-    e.preventDefault();
-    setAddMovieTitle(movie.Title);
-  }
-
-  // Remove movie from favorite list by clicking on the favorite icon
-  const handleRemoveMovie = (e) => {
-    e.preventDefault();
-    setRemoveMovieTitle(movie.Title);
-  }
-
-  useEffect(() => {
-    if (user && movie) {
-      setIsFavorited(user.favoriteMovies.includes(movie._id));
-      isFavorite = true;
-    } else {
-      setIsFavorited(false);
-      isFavorite = false;
-    }
-  }, [user, movie, user]);
-
+export const MovieCard = ({ movie }) => {
 
   return (
-    <Card className='h-100 movie-card'>
-      <Card.Img variant="top" src={movie.ImageUrl} alt={`Image of ${movie.Title}`} className='movie-card__img' />
-      <Card.Body>
-        <Col className='d-flex justify-content-between'>
-          <Card.Title className='movie-card__title fw-bold mb-3'>{movie.Title}</Card.Title>
-          {isFavorite && isFavorited ? (
-            <Card.Img
-              src={hearted}
-              onClick={handleRemoveMovie}
-              disabled={isFavorite}
-              alt='unhearted icon'
-              className='favorite-icon'
-            />
-          ) : (
-            <Card.Img
-              src={unhearted}
-              onClick={handleAddMovie}
-              alt='hearted icon'
-              className='favorite-icon'
-            />
-          )}
-        </Col>
+    <Card className='movie-card h-100 w-100'>
+      <Card.Header className='p-0'>
+        <Card.Img variant="top" src={movie.ImageUrl} alt={`Image of ${movie.Title}`} className='img' />
+      </Card.Header>
+      <Card.Body className='card-body'>
+        <Card.Title className='movie-card__title fw-bold mb-3'>{movie.Title}</Card.Title>
         <Card.Text className='movie-card__description'>{movie.Description}</Card.Text>
-        <Col className='d-flex justify-content-between align-items-center mt-3'>
-          <Link to={`/movie/${encodeURIComponent(movie._id)}`}>
-            <Button variant="link">Open</Button>
+      </Card.Body>
+      <Card.Footer className='border-0  bg-transparent'>
+        <Col className='d-flex justify-content-center gap-3 align-items-center mt-3'>
+          <Link to={`/movie/${encodeURIComponent(movie._id)}`} className='text-white text-decoration-none'>
+            <span className='link-btn p-2'>Open</span>
           </Link>
-          <Card.Text>{movie.Genre.map(g => (
-            <span key={g.name}>{g.name}</span>
+          <Card.Text className='p-2'>{movie.Genre.map(g => (
+            <span key={g.name} className='link-btn p-2'>{g.name}</span>
           ))}
           </Card.Text>
         </Col>
-      </Card.Body>
-      </Card>
+      </Card.Footer>
+    </Card>
   );
 };
 
