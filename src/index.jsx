@@ -10,12 +10,17 @@ import store from "./store";
 import "./sass/index.scss";
 
 const App = () => {
-  return ( 
+  const user = localStorage.getItem('user')
+  return (
     <Provider store={store}>
-      <Container className="App h-100 justify-content-center" > 
-      <MainView /> 
-      <FooterView />
-      </Container> 
+      <Container fluid className="App justify-content-center" >
+        <MainView />
+        {!user ? (
+          <FooterView /> === 'undefined'
+        ) : (
+          <FooterView />
+        )}
+      </Container>
     </Provider>
   );
 };
