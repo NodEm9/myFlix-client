@@ -7,13 +7,11 @@ import { ProfileView } from "../profile-view/profile-view";
 import Skeleton from "../loading/skeleton";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import ToastNotification from "../toast/toast";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/movies/movieSlice";
 import MoviesList from "../movie-list/movie-list";
-import { FaArrowUp } from "react-icons/fa6";
 
 
 export const MainView = () => {
@@ -81,9 +79,9 @@ export const MainView = () => {
   return (
     <BrowserRouter>
       <NavigationBar
-        onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }}
+        onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); window.location.reload(); }}
       />
-      <Row className="main h-100 pt-5 mt-5 mb-3 justify-content-center pb-5">
+      <Row md={12}  className="main pt-5 mt-5 mb-5 justify-content-center pb-5">
         <Routes>
           <Route
             path="/signup"
@@ -92,16 +90,16 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col md={5} className="pb-5 mb-5 mt-1" >
-                    <h1 className="text-center mt-4 pb-5 fs-1-sm text-wrap fs-3" >Welcome to myFlix</h1>
+                  <Col md={8} className="login py-5 mt-1 text-center justify-content-center" >
                     <SignupView />
-                    <button
+                      <a
+                        type="button"
                       onClick={() => setShowSignup(!showSignup)}
-                      className="bg-transparent border-0 lead link-primary mt-1 mt-sm-2 mt-xm-1"
+                      className="switch-view bg-transparent mt-2 border-0 lea link-primary mt-1 mt-sm-2 mt-xm-1"
                     >
                       {!showSignup ? "Already have an account? Login here." :
                         <Navigate to="/login" />}
-                    </button>
+                    </a>
                   </Col>
                 )}
               </>
@@ -114,16 +112,16 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col md={5} >
-                    <h1 className="text-center  mt-4 fs-1-sm text-wrap fs-3" >Welcome to myFlix</h1>
+                  <Col md={12} className="justify-content-center text-center">
                     <LoginView />
-                    <button
+                      <a
+                        type="button"
                       onClick={() => setShowSignup(!showSignup)}
-                      className="switch-view bg-transparent border-0 lead link-primary "
+                      className="switch-view bg-transparent mt-2 border-0 lea link-primary "
                     >
                       {!showSignup ? "Don't have account? Sign Up here." :
                         <Navigate to="/signup" />}
-                    </button>
+                    </a>
                   </Col>
                 )}
               </>
@@ -169,17 +167,17 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <>
-                    <Col md={12} className="text-md-center">
+                    <Col md={8} className="text-md-center">
                       The movie list it empty!,
                       <p>Please, be patient the movies are propably loading...</p>
                     </Col>
-                    <Col md={12} className="pb-5 justify-content-md-center">
+                    <Col md={8} className="pb-5 justify-content-md-center">
                       <Skeleton />
                     </Col>
                   </>
                 ) : (
                   <>
-                    <Col md={12}  sm={3} lg={12} className="pb-5 movies"> 
+                    <Col md={10}  sm={3} className="pb-5 movies"> 
                       <MoviesList />
                     </Col>
                   </>
@@ -188,19 +186,6 @@ export const MainView = () => {
             }
           />
         </Routes>
-      </Row>
-      <Row className="p-5">
-        <Col>
-          <Button
-            variant="dark"
-            className="fs-4 rounded-circle float-end"
-            name="scrollTop button"
-            aria-label="Scroll to top"
-            onClick={scrollTop}
-          >
-            <FaArrowUp className="up-arrow" />
-          </Button>
-        </Col>
       </Row>
       {showToast && <ToastNotification message={user ? `Welcome back ${user.Username}` : "You are logged out"} />}
     </BrowserRouter>
