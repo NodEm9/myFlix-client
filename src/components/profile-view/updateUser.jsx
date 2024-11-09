@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import './profile-view.scss';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import ToastNotification from "../toast/toast"; 
+import ToastNotification from "../toast/toast";
 
 
 export const UpdateUserData = () => {
@@ -37,7 +38,7 @@ export const UpdateUserData = () => {
       Birthday: birthday
     };
 
-     fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}`, {
+    fetch(`https://myflix-app-led6.onrender.com/users/${user.Username}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -64,13 +65,13 @@ export const UpdateUserData = () => {
     setEmail("");
     setBirthday("");
     setShow(true);
-  }; 
+  };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit} className="px-md-5 ">
-      <h2 className='fw-bold'>Update Profile</h2>
+    <Form noValidate validated={validated} onSubmit={handleSubmit} className="px-md-5 h-100">
+      <h2 className='fw-semi-bold fs-4 mb-3'>Update Profile</h2>
       <Form.Group controlId="formUsername">
-        <Form.Label className="invisible">Username:</Form.Label>
+        <Form.Label className="pt-1 pb-1">Username:</Form.Label>
         <Form.Control
           type="text"
           value={username}
@@ -78,40 +79,46 @@ export const UpdateUserData = () => {
           required
           minLength={5}
           onChange={(e) => setUsername(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
       <Form.Group controlId="formPassword">
-        <Form.Label className="invisible">Password:</Form.Label>
+        <Form.Label className="pt-1 pb-1">Password:</Form.Label>
         <Form.Control
           type="password"
           value={password}
           placeholder="Password"
           required
           onChange={(e) => setPassword(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
       <Form.Group controlId="formEmail">
-        <Form.Label className="invisible">Email:</Form.Label>
+        <Form.Label className="pt-1 pb-1">Email:</Form.Label>
         <Form.Control
           type="email"
           value={email}
           placeholder="Email address"
           required
           onChange={(e) => setEmail(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
       <Form.Group controlId="formBirthday">
-        <Form.Label className="invisible">Birthday:</Form.Label>
+        <Form.Label className="pt-1 pb-1">Birthday:</Form.Label>
         <Form.Control
           type="date"
           value={birthday}
           required
           onChange={(e) => setBirthday(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
-      <Button variant="primary" type="submit" className="mt-2 float-end">
+      <Form.Group controlId="formSubmit">
+      <Button type="submit" className="mt-2 float-end">
         Update
-      </Button>
+        </Button>
+      </Form.Group>
       {errMsg ?
         show && <ToastNotification message={errMsg} txtColor="text-danger" />
         : show && <ToastNotification message={successMessage} txtColor="text-success" />
