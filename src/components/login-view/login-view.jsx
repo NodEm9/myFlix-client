@@ -73,35 +73,41 @@ const LoginView = () => {
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit} className="form mt-5 pt-5">
+    <>
+    <Form noValidate validated={validated} onSubmit={handleSubmit} className="mt-5 pt-5 h-100">
+      <h1 className="fs-3 fw-semi-bold">Log in to myFlix</h1>
       <Form.Group as={Col} controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
+        <Form.Label className="label">Username:</Form.Label>
         <Form.Control
           type="text"
           value={username}
           required
           minLength={5}
+          placeholder="Enter username"
           onChange={(e) => setUsername(e.target.value)}
-          className="mb-3"
+          className="mb-3 input-group"
         />
       </Form.Group>
       <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
+        <Form.Label className="label">Password:</Form.Label>
         <Form.Control
           type="password"
           value={password}
           required
+          placeholder="Enter password"
           onChange={(e) => setPassword(e.target.value)}
+          className="input-group"
         />
       </Form.Group>
-      <Button variant="primary" type="submit" className="mb-5 mt-2 float-end" >
-        Submit
+      <Button type="submit" className="mb-5 mt-2 float-end" >
+        login
       </Button>
       {errMsg ?
         show && <ToastNotification message={errMsg} txtColor="text-danger" />
         : show && <ToastNotification message={successMessage} txtColor="text-success" />
       }
-    </Form>
+      </Form>
+    </>
   );
 };
 
