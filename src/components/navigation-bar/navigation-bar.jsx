@@ -9,10 +9,10 @@ export const NavigationBar = ({ onLoggedOut }) => {
   const user = useSelector((state) => state.user.user);
 
   return (
-    <Navbar bg="light" expand="lg" className='pb-5' >
-      <Container className="bg-light fixed-top">
+    <Navbar expand="lg">
+      <Container fluid className="bg-light fixed-top px-5">
         <Nav>
-          <Navbar.Brand href='/' className="d-md-flex align-items-center fw-bold fs-2">
+          <Navbar.Brand href='/' className="website-name d-md-flex align-items-center fw-bold fs-2">
             myFlix
           </Navbar.Brand>
           <Navbar.Text className="home fs-5">
@@ -38,7 +38,7 @@ export const NavigationBar = ({ onLoggedOut }) => {
             <Navbar.Text className="m-3">
               <Nav.Link href="/profile">Profile</Nav.Link>
             </Navbar.Text>
-            <Navbar.Text className='bg-primary m-3 px-4 text-white d-flex align-items-center rounded-3 gap-2'>
+            <Navbar.Text className='btn-nav m-3 px-4 p-1 text-white d-flex align-items-center rounded-pill gap-2'>
               <Nav.Link href="/profile" className="text-white fs-5">
                 Signed in as: {user ? user.Username : "Guest"}
               </Nav.Link>
