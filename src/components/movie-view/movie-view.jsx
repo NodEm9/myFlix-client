@@ -9,11 +9,24 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SimilarMovies from "./similar-movies";
 import "./movie-view.scss";
+import AddToFavorite from "./addToFavorite";
+import FavoriteProvider from "../../context/FavoriteContext";
 
-export const MovieView = () => {
+
+export const MovieView = ({ user }) => {
+  user = useSelector((state) => state.user.user);
   const movies = useSelector((state) => state.movies.movies);
   const { movieId } = useParams();
   const movie = movies.find((m) => m._id === movieId);
+
+  // Add movie to favorite list
+  const handleFavorite = () => {
+    return (
+      <FavoriteProvider movie={movie}>
+        <AddToFavorite movie={movie} isFavorite={false} />
+      </FavoriteProvider>
+    )
+  }
 
   // Filter similar movies by genre and exclude the current movie
   const similarMovies = movies.filter((m) =>
@@ -23,7 +36,7 @@ export const MovieView = () => {
 
   return (
     <>
-      <Row md={12} className="flex-md-row flex-column-reverse pb-4">
+      <Row md={12} className="flex-md-row flex-column-reverse pt-5 pb-4 px-5">
         <Col md={7} className="movie-view">
           <Col className="title text-md-lg">
             <h3 >Title:</h3>
@@ -67,7 +80,7 @@ export const MovieView = () => {
             {movie.Actor.map(a => (
               <div key={a.name}>
                 <span>{a.name}</span>
-              </div>        
+              </div>
             ))}
           </Col>
           <Col className="d-flex align-items-center gap-3">
@@ -88,13 +101,14 @@ export const MovieView = () => {
               {movie.Featured ? `${movie.Featured}` : "No information available."}
             </span>
           </Col>
-          <Col className="button-wrapper">
-            <Link to={"/"}>
-              <Button variant="link" className="back-button">
+          <Col className="d-flex w-100 m-w-100 gap-3 align-items-center">
+            <Link to={"/"} className="w-100">
+              <Button variant="success" className="d-flex justify-content-center align-items-center float-start text-white">
                 <FaArrowLeft />
                 Back
               </Button>
             </Link>
+            <span className="w-100">{handleFavorite()}</span>
           </Col>
         </Col>
         <Col md={5} className="">
@@ -102,13 +116,13 @@ export const MovieView = () => {
             src={movie.ImageUrl}
             key={movie.ImageUrl}
             alt="movie-poster"
-            className="w-100 rounded-3 shadow-sm movie-view-img"
+            className="w-100 rounded-3 px-lg-5 px-md-0 shadow-s movie-view-img"
           />
         </Col>
       </Row>
       <hr />
       <Row>
-        <SimilarMovies movies={similarMovies} />
+        <Col className="p-5"> <SimilarMovies movies={similarMovies} /></Col>
       </Row>
     </>
   );
