@@ -35,8 +35,8 @@ export const MovieView = ({ user }) => {
   );
 
   return (
-    <>
-      <Row md={12} className="flex-md-row flex-column-reverse pt-5 pb-4 px-5">
+    <Row>
+      <Row md={12} className="movie-page pt-4 pb-4">
         <Col md={7} className="movie-view">
           <Col className="title text-md-lg">
             <h3 >Title:</h3>
@@ -111,12 +111,12 @@ export const MovieView = ({ user }) => {
             <span className="w-100">{handleFavorite()}</span>
           </Col>
         </Col>
-        <Col md={5} className="">
+        <Col md={5}>
           <Card.Img
             src={movie.ImageUrl}
             key={movie.ImageUrl}
             alt="movie-poster"
-            className="w-100 rounded-3 px-lg-5 px-md-0 shadow-s movie-view-img"
+            className="shadow-s movie-view-img"
           />
         </Col>
       </Row>
@@ -124,7 +124,7 @@ export const MovieView = ({ user }) => {
       <Row>
         <Col className="p-5"> <SimilarMovies movies={similarMovies} /></Col>
       </Row>
-    </>
+    </Row>
   );
 };
 

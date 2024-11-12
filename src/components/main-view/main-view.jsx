@@ -81,7 +81,7 @@ export const MainView = () => {
       <NavigationBar
         onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); window.location.reload(); }}
       />
-      <Row md={12}  className="main pt-5 mt-5 mb-5 justify-content-center pb-5">
+      <Row md={12} className="main pt-5 mt-5 mb-5 justify-content-center pb-5">
         <Routes>
           <Route
             path="/signup"
@@ -92,8 +92,8 @@ export const MainView = () => {
                 ) : (
                   <Col md={8} className="login py-5 mt-1 text-center justify-content-center" >
                     <SignupView />
-                      <a
-                        type="button"
+                    <a
+                      type="button"
                       onClick={() => setShowSignup(!showSignup)}
                       className="switch-view bg-transparent mt-2 border-0 lea link-primary mt-1 mt-sm-2 mt-xm-1"
                     >
@@ -114,8 +114,8 @@ export const MainView = () => {
                 ) : (
                   <Col md={12} className="justify-content-center text-center">
                     <LoginView />
-                      <a
-                        type="button"
+                    <a
+                      type="button"
                       onClick={() => setShowSignup(!showSignup)}
                       className="switch-view bg-transparent mt-2 border-0 lea link-primary "
                     >
@@ -136,11 +136,7 @@ export const MainView = () => {
                 ) : movies.length === 0 ? (
                   <Col >List is Empty</Col>
                 ) : (
-                  <Row className="pb-5 mx-auto">
-                    <Col md={12} >
-                      <MovieView movies={movies} />
-                    </Col>
-                  </Row>
+                  <MovieView movies={movies} />
                 )}
               </>
             }
@@ -153,7 +149,7 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={12} >
-                      <ProfileView movies={movies} />
+                    <ProfileView movies={movies} />
                   </Col>
                 )}
               </>
@@ -177,7 +173,7 @@ export const MainView = () => {
                   </>
                 ) : (
                   <>
-                    <Col md={10}  sm={3} className="pb-5 movies"> 
+                    <Col md={10} sm={3} className="pb-5 movies">
                       <MoviesList />
                     </Col>
                   </>

@@ -12531,9 +12531,10 @@
 }
 
 .movie-view-img {
-  object-fit: cover;
+  width: 70%;
+  height: 80%;
   margin-top: -1.5rem;
-  padding: 1rem;
+  padding: 1rem 0;
 }
 
 .title {
@@ -12577,6 +12578,7 @@
 
 @media (width <= 768px) {
   .movie-view-img {
+    width: 100%;
     margin-top: -1.5rem;
   }
 
@@ -12597,7 +12599,41 @@
   }
 
   .similar-movies__list {
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media (width >= 769px) and (width <= 1024px) {
+  .movie-view {
+    padding: 0 .2rem;
+  }
+
+  .movie-view-img {
+    width: 100%;
+    height: 55%;
+  }
+
+  .title {
+    margin-top: 1rem;
+  }
+
+  .movie-actors {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 0;
+  }
+
+  .similar-movies {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .similar-movies__list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     justify-content: center;
     align-items: center;
     width: 100%;

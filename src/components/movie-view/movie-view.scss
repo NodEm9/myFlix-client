@@ -2,16 +2,16 @@
 
 $primary: #1c960c;
 
-
 .movie-view h3 {
   font-size: 18px;
   font-weight: 600;
 }
 
 .movie-view-img {
+  width: 70%;
+  height: 80%;
   margin-top: -1.5rem;
-  object-fit: cover;
-  padding: 1rem;
+  padding: 1rem 0;
 }
 
 .title {
@@ -56,6 +56,7 @@ $primary: #1c960c;
 @media all and (max-width: 768px){
   .movie-view-img {
     margin-top: -1.5rem;
+    width: 100%;
   }
 
   .title {
@@ -74,7 +75,41 @@ $primary: #1c960c;
     align-items: center;
     
   &__list {
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+}
+
+@media all and (min-width: 769px) and (max-width: 1024px){
+  .movie-view {
+    padding: 0 0.2rem;
+  }
+  
+  .movie-view-img {
+    width: 100%;
+    height: 55%;
+  }
+
+  .title {
+    margin-top: 1rem;    
+  }
+
+  .movie-actors {
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .similar-movies{
+    justify-content: center;
+    align-items: center;
+    
+  &__list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     width: 100%;
     justify-content: center;
     align-items: center;
