@@ -75860,6 +75860,7 @@ var _toast = require("../toast/toast");
 var _toastDefault = parcelHelpers.interopDefault(_toast);
 var _userSlice = require("../../redux/user/userSlice");
 var _reactRedux = require("react-redux");
+var _reactRouter = require("react-router");
 var _s = $RefreshSig$();
 const LoginView = ()=>{
     _s();
@@ -75923,8 +75924,8 @@ const LoginView = ()=>{
                     children: "Log in to myFlix"
                 }, void 0, false, {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 78,
-                    columnNumber: 7
+                    lineNumber: 80,
+                    columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
                     as: (0, _colDefault.default),
@@ -75935,8 +75936,8 @@ const LoginView = ()=>{
                             children: "Username:"
                         }, void 0, false, {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 80,
-                            columnNumber: 9
+                            lineNumber: 82,
+                            columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
                             type: "text",
@@ -75948,14 +75949,14 @@ const LoginView = ()=>{
                             className: "mb-3 input-group"
                         }, void 0, false, {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 81,
-                            columnNumber: 9
+                            lineNumber: 83,
+                            columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 79,
-                    columnNumber: 7
+                    lineNumber: 81,
+                    columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
                     controlId: "formPassword",
@@ -75965,8 +75966,8 @@ const LoginView = ()=>{
                             children: "Password:"
                         }, void 0, false, {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 92,
-                            columnNumber: 9
+                            lineNumber: 94,
+                            columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
                             type: "password",
@@ -75977,14 +75978,14 @@ const LoginView = ()=>{
                             className: "input-group"
                         }, void 0, false, {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 93,
-                            columnNumber: 9
+                            lineNumber: 95,
+                            columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 91,
-                    columnNumber: 7
+                    lineNumber: 93,
+                    columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                     type: "submit",
@@ -75992,29 +75993,29 @@ const LoginView = ()=>{
                     children: "login"
                 }, void 0, false, {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 102,
-                    columnNumber: 7
+                    lineNumber: 104,
+                    columnNumber: 9
                 }, undefined),
                 errMsg ? show && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toastDefault.default), {
                     message: errMsg,
                     txtColor: "text-danger"
                 }, void 0, false, {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 106,
-                    columnNumber: 17
+                    lineNumber: 108,
+                    columnNumber: 19
                 }, undefined) : show && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toastDefault.default), {
                     message: successMessage,
                     txtColor: "text-success"
                 }, void 0, false, {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 107,
-                    columnNumber: 19
+                    lineNumber: 109,
+                    columnNumber: 21
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 77,
-            columnNumber: 5
+            lineNumber: 79,
+            columnNumber: 7
         }, undefined)
     }, void 0, false);
 };
@@ -76033,7 +76034,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Col":"2L2I6","../toast/toast":"6TRzM","../../redux/user/userSlice":"jPAM2","react-redux":"62sf7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iBZ80":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Col":"2L2I6","../toast/toast":"6TRzM","../../redux/user/userSlice":"jPAM2","react-redux":"62sf7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-router":"dbWyW"}],"iBZ80":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
@@ -86583,11 +86584,8 @@ const NavigationBar = ({ onLoggedOut })=>{
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default).Link, {
                                     href: "/profile",
                                     className: "text-white fs-5",
-                                    children: [
-                                        "Signed in as: ",
-                                        user ? user.Username : "Guest"
-                                    ]
-                                }, void 0, true, {
+                                    children: user ? `Welcome ${user.Username}` : "Welcome"
+                                }, void 0, false, {
                                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
                                     lineNumber: 42,
                                     columnNumber: 15

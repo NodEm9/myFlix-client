@@ -40,7 +40,7 @@ export const NavigationBar = ({ onLoggedOut }) => {
             </Navbar.Text>
             <Navbar.Text className='btn-nav m-3 px-4 p-1 text-white d-flex align-items-center rounded-pill gap-2'>
               <Nav.Link href="/profile" className="text-white fs-5">
-                Signed in as: {user ? user.Username : "Guest"}
+                {user ? `Welcome ${user.Username}` : "Welcome"}
               </Nav.Link>
             </Navbar.Text>
           </Nav>
